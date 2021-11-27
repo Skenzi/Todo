@@ -9,20 +9,32 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
+    },
+    devServer: {
+        historyApiFallback: true,
     },
     module: {
         rules: [
             {
-                test: /.css$/,
+                test: /\.js?x$/,
+                use: 'babel-loader',
+            },
+            {
+                test: /\.s?css$/,
                 use: [
-                    {loader: 'css-loader'},
-                    {loader: 'style-loader'},
-                    {loader: 'sass-loader'},
-                ]
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader',
+                ],
             },
             {
                 test: /\.pug$/,
                 use: 'pug-loader'
+            },
+            {
+                test: /\.(svg|png|eot|svg|ttf|woff|woff2)$/,
+                use: 'file-loader'
             }
         ]
     },

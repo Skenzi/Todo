@@ -1,0 +1,16 @@
+@import './main';
+@import './header';
+@import './logo';
+@import './buttons';
+
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: 'MedievalSharp', cursive;
+}
+button {
+    background-color: white;
+    border: none;
+}

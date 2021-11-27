@@ -1,0 +1,21 @@
+.button {
+    padding: 15px 10px;
+    width: 150px;
+    height: 50px;
+    font-family: inherit;
+    text-align: center;
+    &-bar {
+        display: inline-block;
+        box-shadow: 0 5px 10px black;
+        background-color: #ffe4cd;
+        text-decoration: none;
+        color: black;
+        &:hover {
+            background-color: #ffe4cd;
+            box-shadow: none;
+        }
+        &:nth-child(1n+2) {
+            margin-left: 20px;
+        }
+    }
+}

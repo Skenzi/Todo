@@ -1,2 +1,4 @@
 start:
-	NODE_ENV=production npx webpack
+	npx webpack serve
+build:
+	npx webpack
