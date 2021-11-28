@@ -33,8 +33,15 @@ module.exports = {
                 use: 'pug-loader'
             },
             {
-                test: /\.(svg|png|eot|svg|ttf|woff|woff2)$/,
+                test: /\.(svg|eot|ttf|woff|woff2)$/,
                 use: 'file-loader'
+            },
+            {
+                test: /\.png$/,
+                loader: 'url-loader',
+                options: {
+                    limit: 25000,
+                }
             }
         ]
     },

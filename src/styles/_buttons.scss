@@ -1,9 +1,9 @@
 .button {
     padding: 15px 10px;
     width: 150px;
-    height: 50px;
     font-family: inherit;
     text-align: center;
+    cursor: pointer;
     &-bar {
         display: inline-block;
         box-shadow: 0 5px 10px black;
@@ -18,4 +18,7 @@
             margin-left: 20px;
         }
     }
+}
+.buttons-group {
+    display: flex;
 }

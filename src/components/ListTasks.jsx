@@ -1,6 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { tasksActiveSelector, tasksSuccefullSelector, tasksFailedSelector } from "../store/selectors";
+import { setCurrentTaskId } from '../store/slices/tasksSlice.js';
 
 const tasksSelectors = {
     active: tasksActiveSelector,
@@ -10,11 +11,17 @@ const tasksSelectors = {
 
 const ListTasks = ({ currentTasksStatus }) => {
     const tasks = useSelector(tasksSelectors[currentTasksStatus]);
-    return <ol>
+    const dispatch = useDispatch();
+    const changeCurrentId = (id) => () => {
+        dispatch(setCurrentTaskId(id));
+    }
+    return <ol className="tasks-list">
     {tasks.map((task) => {
         return <li key={task.id}>
-            <h2>{task.name}</h2>
-            <div>{task.description}</div>
+            <button type="button" className="button" onClick={changeCurrentId(task.id)}>
+                <h2>{task.name}</h2>
+                <div>{task.description}</div>
+            </button>
         </li>
     })}
 </ol>;

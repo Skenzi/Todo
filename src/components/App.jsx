@@ -6,16 +6,18 @@ import SuccefullTasks from './pages/SucceffulTasks.jsx';
 import FailedTasks from './pages/FailedTasks.jsx';
 
 const App = () => {
-    return <div>
+    return <>
         <Router>
             <Header />
-            <Routes>
-                <Route exact path="/" element={<AllTasks />} />
-                <Route exact path="/succefullTasks" element={<SuccefullTasks />} />
-                <Route exact path="/failedTasks" element={<FailedTasks />} />
-            </Routes>
+            <main className="flex-container p-20 h-80">
+                <Routes>
+                    <Route exact path="/" element={<AllTasks />} />
+                    <Route exact path="/succefullTasks" element={<SuccefullTasks />} />
+                    <Route exact path="/failedTasks" element={<FailedTasks />} />
+                </Routes>
+            </main>
         </Router>
-    </div>
+    </>
 };
 
 export default App;
