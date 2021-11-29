@@ -1,10 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import ListTasks from "../ListTasks.jsx";
+import TaskNote from "../TaskNote.jsx";
+import { currentTask } from '../../store/selectors/index.js';
 
 const FailedTasks = () => {
-    return <div>
+    const task = useSelector(currentTask);
+    return <>
         <ListTasks currentTasksStatus="failed" />
-    </div>;
+        {task.status === 'failed' ? <TaskNote /> : null}
+    </>;
 }
 
 export default FailedTasks;

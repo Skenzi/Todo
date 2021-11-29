@@ -10,8 +10,7 @@ const TaskNote = () => {
             <h2 className="task-name">{task.name}</h2>
             <div className="task-text">{task.description}</div>
             <div className="buttons-group">
-                <button type="button" className="button">Завершить</button>
-                <button type="button" className="button">Изменить</button>
+                {task.status === 'active' ? <><button type="button" className="button">Завершить</button><button type="button" className="button">Изменить</button></> : null}
                 <button type="button" className="button">Удалить</button>
             </div>
         </section>;
