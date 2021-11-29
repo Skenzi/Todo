@@ -4,6 +4,7 @@ import Header from './Header.jsx';
 import AllTasks from './pages/AllTasks.jsx';
 import SuccefullTasks from './pages/SucceffulTasks.jsx';
 import FailedTasks from './pages/FailedTasks.jsx';
+import ModalTaskForm from "./ModalFormTask.jsx";
 
 const App = () => {
     return <>
@@ -16,6 +17,7 @@ const App = () => {
                     <Route exact path="/failedTasks" element={<FailedTasks />} />
                 </Routes>
             </main>
+            <ModalTaskForm />
         </Router>
     </>
 };
