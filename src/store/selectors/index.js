@@ -1,7 +1,8 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-const tasksSelector = (state) => state.tasksInfo.tasks;
-const currentTaskIdSelector = (state) => state.tasksInfo.currentTaskId;
+export const tasksSelector = (state) => state.tasksInfo.tasks;
+export const currentTaskIdSelector = (state) => state.tasksInfo.currentTaskId;
+export const modalSelector = (state) => state.modalInfo;
 
 export const tasksActiveSelector = createSelector(
     tasksSelector,
