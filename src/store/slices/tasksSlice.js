@@ -2,20 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 import _ from 'lodash';
 
 const tasksSlice = createSlice({
-    name: 'tasks',
+    name: 'tasksInfo',
     initialState: {
-        tasks: [
-            { name: 'task1', description: 'taskText', id: 1, status: 'active'},
-            { name: 'task2', description: 'taskText', id: 2, status: 'failed'},
-            { name: 'task3', description: 'taskText', id: 3, status: 'active'},
-            { name: 'task4', description: 'taskText', id: 4, status: 'succefull'}
-        ],
+        tasks: [],
         currentTaskId: 1,
         currentTask: null,
     },
     reducers: {
         addTask: (state, { payload }) => {
-            const newTask = { ...payload, id: _.uniqueId()};
+            const date = new Date();
+            const newTask = { ...payload, status: 'active', id: _.uniqueId(), dateStart: date.getTime()};
             state.tasks.push(newTask);
         },
         deleteTask: (state, { payload }) => {

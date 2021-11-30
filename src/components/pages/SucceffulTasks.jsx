@@ -8,7 +8,7 @@ const SuccefullTasks = () => {
     const task = useSelector(currentTask);
     return <>
         <ListTasks currentTasksStatus="succefull" />
-        {task.status === 'succefull' ? <TaskNote /> : null}
+        {task && task.status === 'succefull' ? <TaskNote /> : null}
     </>;
 }
 

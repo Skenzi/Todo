@@ -8,7 +8,7 @@ const FailedTasks = () => {
     const task = useSelector(currentTask);
     return <>
         <ListTasks currentTasksStatus="failed" />
-        {task.status === 'failed' ? <TaskNote /> : null}
+        {task && task.status === 'failed' ? <TaskNote /> : null}
     </>;
 }
 

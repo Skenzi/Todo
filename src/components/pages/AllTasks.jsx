@@ -8,7 +8,7 @@ const AllTasks = () => {
     const task = useSelector(currentTask);
     return <>
         <ListTasks currentTasksStatus="active" />
-        {task.status === 'active' ? <TaskNote /> : null}
+        {task && task.status === 'active' ? <TaskNote /> : null}
     </>;
 }
 

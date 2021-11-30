@@ -9,6 +9,7 @@ import ModalTaskForm from "./ModalFormTask.jsx";
 const App = () => {
     return <>
         <Router>
+            <div className="shadow">
             <Header />
             <main className="flex-container p-20 h-80 table-background">
                 <Routes>
@@ -18,6 +19,7 @@ const App = () => {
                 </Routes>
             </main>
             <ModalTaskForm />
+            </div>
         </Router>
     </>
 };
