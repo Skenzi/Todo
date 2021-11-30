@@ -30,7 +30,7 @@ const ListTasks = ({ currentTasksStatus }) => {
             </button>
         </li>
     })}
-</ol>;
+</ol>
     </div>
 };
 

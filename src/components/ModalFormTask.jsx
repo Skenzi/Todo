@@ -1,10 +1,15 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { modalSelector } from '../store/selectors/index.js';
+import { setStateModal } from '../store/slices/modalSlice.js';
 
 const ModalTaskForm = () => {
     const modalState = useSelector(modalSelector);
-    return modalState.show ? <div className="modal-background">
+    const dispatch = useDispatch();
+    return modalState.show ? <div className="modal-background" onClick={(e) => {
+        e.stopPropagation();
+        dispatch(setStateModal(false));
+    }}>
         <div className="modal">
             <h2>Add Quest</h2>
             <form className="form">
