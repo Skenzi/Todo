@@ -1,4 +1,16 @@
 .task {
+    &-header {
+        position: relative;
+        & .button {
+            position: absolute;
+            background-color: transparent;
+            top: 0;
+            right: 10px;
+        }
+    }
+    &-body {
+
+    }
     &-note {
         width: 400px;
         height: 90%;

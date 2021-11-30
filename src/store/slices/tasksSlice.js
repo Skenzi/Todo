@@ -4,7 +4,7 @@ import _ from 'lodash';
 const tasksSlice = createSlice({
     name: 'tasksInfo',
     initialState: {
-        tasks: [],
+        tasks: [{name: '111', text: '1111', dateEnd: '11-11-1111', status: 'active', id: 2}],
         currentTaskId: 1,
         currentTask: null,
     },
