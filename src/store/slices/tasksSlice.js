@@ -4,7 +4,7 @@ import _ from 'lodash';
 const tasksSlice = createSlice({
     name: 'tasksInfo',
     initialState: {
-        tasks: [{name: '111', text: '1111', dateEnd: '2021-12-01', status: 'active', id: 0}, {name: '111', text: '1111', dateEnd: '2021-11-30', status: 'active', id: 1}],
+        tasks: [{name: '111', text: '1111', dateEnd: '2021-12-02', status: 'active', id: 0}, {name: '111', text: '1111', dateEnd: '2021-11-30', status: 'active', id: 1}],
         currentTaskId: 1,
         currentTask: null,
     },
@@ -30,6 +30,11 @@ const tasksSlice = createSlice({
         setCurrentTaskId: (state, { payload }) => {
             state.currentTaskId = payload;
         },
+        setTaskText: (state, { payload }) => {
+            const currentTask = state.tasks.find(({ id }) => payload.id === id);
+            const currentTaskId = state.tasks.indexOf(currentTask);
+            state.tasks[currentTaskId] = {...currentTask, text: payload.newText};
+        },
         setTaskStatus: (state, { payload }) => {
             const currentTask = state.tasks.find(({ id }) => payload.id === id);
             const currentTaskId = state.tasks.indexOf(currentTask);
@@ -38,6 +43,6 @@ const tasksSlice = createSlice({
     }
 });
 
-export const { addTask, deleteTask, setCurrentTaskId, setTaskStatus, checkTasks } = tasksSlice.actions;
+export const { addTask, deleteTask, setCurrentTaskId, setTaskStatus, checkTasks, setTaskText } = tasksSlice.actions;
 
 export default tasksSlice.reducer;
