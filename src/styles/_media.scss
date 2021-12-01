@@ -1,0 +1,32 @@
+@media screen and (max-width: 769px) {
+    .header-item:nth-child(1n + 2) {
+        margin-left: 10px;
+    }
+    .task-note {
+        margin-left: 100px; 
+    }
+}
+@media screen and (max-width: 426px) {
+    .header {
+        flex-direction: column;
+        &-item {
+            flex-direction: column;
+            &:nth-child(1n + 2) {
+                margin-left: 0;
+            }
+            & .button-bar {
+                margin-left: 0;
+            }
+        }
+    }
+    .main {
+        flex-direction: column;
+    }
+    .tasks {
+        width: 100%;
+    }
+    .task-note {
+        width: 100%;
+        margin-left: 0;
+    }
+}

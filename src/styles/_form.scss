@@ -2,4 +2,11 @@
     &-control {
         width: 100%;
     }
+    &-group {
+        display: flex;
+        margin-top: 5px;
+    }
+    &-label {
+        width: 100px;
+    }
 }

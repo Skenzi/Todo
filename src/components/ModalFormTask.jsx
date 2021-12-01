@@ -20,21 +20,21 @@ const ModalTaskForm = () => {
 
     return modalState.show ? <div className="modal-background">
         <div className="modal">
-            <h2>Add Quest</h2>
+            <h2 className="modal-caption">Add Quest</h2>
             <form className="form" onSubmit={onSubmit}>
-                <div>
-                    <label htmlFor="quest-name">Name</label>
-                    <input name="quest-name" required type="text" value={taskData.name} onChange={(e) => setTaskData({...taskData, name: e.currentTarget.value})}></input>
+                <div className="form-group">
+                    <label htmlFor="quest-name" className="form-label">Name</label>
+                    <input name="quest-name" className="form-control" required type="text" value={taskData.name} onChange={(e) => setTaskData({...taskData, name: e.currentTarget.value})}></input>
                 </div>
-                <div>
-                    <label htmlFor="quest-text">Text</label>
-                    <textarea name="quest-text" required value={taskData.text} onChange={(e) => setTaskData({...taskData, text: e.currentTarget.value})}></textarea>
+                <div className="form-group">
+                    <label htmlFor="quest-text" className="form-label">Text</label>
+                    <textarea name="quest-text" className="form-control" rows="15" required value={taskData.text} onChange={(e) => setTaskData({...taskData, text: e.currentTarget.value})}></textarea>
                 </div>
-                <div>
-                    <label htmlFor="quest-text">Срок</label>
-                    <input name="quest-text" required value={taskData.dateEnd} type="date" onChange={(e) => setTaskData({...taskData, dateEnd: e.currentTarget.value})}></input>
+                <div className="form-group">
+                    <label htmlFor="quest-text" className="form-label">Срок</label>
+                    <input name="quest-text" className="form-control" required value={taskData.dateEnd} type="date" onChange={(e) => setTaskData({...taskData, dateEnd: e.currentTarget.value})}></input>
                 </div>
-                <div>
+                <div className="button-group">
                     <button type="submit" className="button button-submit">Add</button>
                     <button type="button" className="button button-submit" onClick={closeModal}>Cancel</button>
                 </div>

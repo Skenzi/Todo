@@ -1,9 +1,12 @@
 .modal {
     position: absolute;
-    left: 25%;
-    top: 40%;
+    left: 45%;
+    top: 20%;
     background-color: rosybrown;
     padding: 50px;
+    &-caption {
+        text-align: center;
+    }
     &-background {
         position: absolute;
         top: 0;
@@ -12,5 +15,8 @@
         height: 100%;
         background-color: rgba($color: #000000, $alpha: 0.5);
         z-index: 1;
+    }
+    & .button-group {
+        margin-top: 10px;
     }
 }

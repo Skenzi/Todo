@@ -11,7 +11,7 @@ const App = () => {
         <Router>
             <div className="shadow">
             <Header />
-            <main className="flex-container p-20 h-80 table-background">
+            <main className="flex-container main table-background">
                 <Routes>
                     <Route exact path="/" element={<AllTasks />} />
                     <Route exact path="/succefullTasks" element={<SuccefullTasks />} />
