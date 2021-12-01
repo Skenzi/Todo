@@ -15,19 +15,18 @@ const TaskForm = ({ task, setStateTaskForm }) => {
         setStateTaskForm(false);
     };
     return <form onSubmit={onSubmit}>
-        <textarea value={newText} onChange={(e) => setText(e.target.value)}></textarea>
-        <button type="submit" className="button">Изменить</button>
+        <textarea className="form-control" rows="15" style={{resize: 'none'}} value={newText} onChange={(e) => setText(e.target.value)}></textarea>
+        <button type="submit" className="button button-submit">Изменить</button>
+        <button type="button" className="button" onClick={() => setStateTaskForm(false)}>Отменить</button>
     </form>
 };
 
 const TaskBody = ({ task, compliteTask, setStateTaskForm }) => {
     return <>
         <div className="task-text">{task.text}</div>
-            <div className="buttons-group">
             {task.status === 'active' ? <>
-            <button type="button" className="button button-with-img" onClick={compliteTask(task.id)}><img src={seal} alt="compliteNote" className="button-img" /></button>
-            <button type="button" className="button button-with-img" onClick={() => setStateTaskForm(true)}><img src={handWithPen} alt="changeNote" className="button-img" /></button></> : null}
-        </div>
+            <button type="button" className="button button-with-img img-complite" onClick={compliteTask(task.id)}><img src={seal} alt="compliteNote" className="button-img" /></button>
+            <button type="button" className="button button-with-img img-change" onClick={() => setStateTaskForm(true)}><img src={handWithPen} alt="changeNote" className="button-img" /></button></> : null}
     </>
 };
 

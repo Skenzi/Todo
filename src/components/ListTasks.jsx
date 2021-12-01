@@ -25,7 +25,7 @@ const ListTasks = ({ currentTasksStatus }) => {
     {tasks.map((task) => {
         return <li key={task.id}>
             <button type="button" className="button" onClick={setCurrentId(task.id)}>
-                <h2>{task.name}</h2>
+                <h2 className="task-name">{task.name}</h2>
                 <div>До: {task.dateEnd}</div>
             </button>
         </li>
