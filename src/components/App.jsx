@@ -5,11 +5,14 @@ import AllTasks from './pages/AllTasks.jsx';
 import SuccefullTasks from './pages/SucceffulTasks.jsx';
 import FailedTasks from './pages/FailedTasks.jsx';
 import ModalTaskForm from "./ModalFormTask.jsx";
+import apiContext from "../context/index.js";
 
 const App = () => {
-    return <>
+    const elements = {
+        body: document.querySelector('body'),
+    }
+    return <apiContext.Provider value={{elements}}>
         <Router>
-            <div className="shadow">
             <Header />
             <main className="flex-container main table-background">
                 <Routes>
@@ -18,10 +21,9 @@ const App = () => {
                     <Route exact path="/failedTasks" element={<FailedTasks />} />
                 </Routes>
             </main>
-            <ModalTaskForm />
-            </div>
         </Router>
-    </>
+        <ModalTaskForm />
+    </apiContext.Provider>
 };
 
 export default App;

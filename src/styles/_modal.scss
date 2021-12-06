@@ -1,9 +1,12 @@
 .modal {
     position: absolute;
-    left: 45%;
+    left: 40%;
     top: 20%;
     background-color: rosybrown;
     padding: 50px;
+    &-open {
+        overflow: hidden;
+    }
     &-caption {
         text-align: center;
     }
