@@ -4,8 +4,16 @@
 .flex-column {
     flex-direction: column;
 }
-.container {
+.container-lg {
     max-width: 1320px;
+    margin: 0 auto;
+}
+.container-md {
+    max-width: 900px;
+    margin: 0 auto;
+}
+.container-sm {
+    max-width: 600px;
     margin: 0 auto;
 }
 .main {
