@@ -1,12 +1,18 @@
 .form {
+    & > * {
+        padding: 10px;
+    }
+    &-footer {
+        border-top: 1px solid black;
+    }
     &-control {
+        display: block;
         width: 100%;
     }
     &-group {
-        display: flex;
-        margin-top: 5px;
+        margin-bottom: 5px;
     }
     &-label {
-        width: 100px;
+        display: inline-block;
     }
 }

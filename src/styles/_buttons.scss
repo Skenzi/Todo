@@ -1,9 +1,11 @@
 .button {
     padding: 15px 10px;
-    width: 150px;
     font-family: inherit;
     text-align: center;
     cursor: pointer;
+    &-sm {
+        padding: 5px;
+    }
     &-bar {
         display: inline-block;
         box-shadow: 0 5px 10px black;

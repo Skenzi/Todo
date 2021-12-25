@@ -9,6 +9,9 @@ const tasksSlice = createSlice({
         currentTask: null,
     },
     reducers: {
+        fetchTasks: (state, { payload }) => {
+            state.tasks = payload;
+        },
         addTask: (state, { payload }) => {
             const date = new Date();
             const day = date.getTime();
@@ -44,6 +47,6 @@ const tasksSlice = createSlice({
     }
 });
 
-export const { addTask, deleteTask, setCurrentTaskId, setTaskStatus, checkTasks, setTaskText } = tasksSlice.actions;
+export const { addTask, deleteTask, setCurrentTaskId, fetchTasks, setTaskStatus, checkTasks, setTaskText } = tasksSlice.actions;
 
 export default tasksSlice.reducer;
