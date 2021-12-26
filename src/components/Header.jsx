@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../images/TodoQuestsLogo.svg";
 import { useContext } from "react";
 import apiContext from "../context";
+import ProfileMenu from "./ProfileMenu.jsx";
 
 const Header = () => {
     const {user, logOut} = useContext(apiContext);
@@ -14,7 +15,7 @@ const Header = () => {
             <Link to="/failedTasks" className="button button-bar">Провальные</Link>
         </nav>
         <div className="header-item">
-            {!(user.username) ? <Link to="/loginPage" type="button" className="button button-bar">Войти/Зарегистрироваться</Link> : <button type="button" className="button button-bar" onClick={logOut}>Выйти</button>}
+            {!(user.username) ? <Link to="/loginPage" type="button" className="button button-bar">Войти/Зарегистрироваться</Link> : <ProfileMenu />}
         </div>
     </header>
 };

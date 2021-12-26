@@ -4,6 +4,7 @@
     align-items: center;
     &-item {
         display: flex;
+        position: relative;
         &:nth-child(1n + 2) {
             margin-left: 100px;
         }
