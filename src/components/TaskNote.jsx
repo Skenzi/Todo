@@ -5,6 +5,8 @@ import paper from '../images/paper.png';
 import seal from '../images/seal.png';
 import handWithPen from '../images/handWithPen.png';
 import { setTaskStatus, deleteTask, setTaskText } from "../store/slices/tasksSlice.js";
+import { useContext } from "react";
+import apiContext from "../context/index.js";
 
 const TaskForm = ({ task, setStateTaskForm }) => {
     const dispatch = useDispatch();
@@ -24,18 +26,31 @@ const TaskForm = ({ task, setStateTaskForm }) => {
 const TaskBody = ({ task, compliteTask, setStateTaskForm }) => {
     return <>
         <div className="task-text">{task.text}</div>
-            {task.status === 'active' ? <>
+        <div className="task-reward" data-exp="100">
+            <h2 className="task-reward-title">Награда</h2>
+            <div className="task-reward-text">{task.reward} опыта</div>
+        </div>
+        {task.status === 'active' ? <>
             <button type="button" className="button button-with-img img-complite" onClick={compliteTask(task.id)}><img src={seal} alt="compliteNote" className="button-img" /></button>
-            <button type="button" className="button button-with-img img-change" onClick={() => setStateTaskForm(true)}><img src={handWithPen} alt="changeNote" className="button-img" /></button></> : null}
+            <button type="button" className="button button-with-img img-change" onClick={() => setStateTaskForm(true)}><img src={handWithPen} alt="changeNote" className="button-img" /></button></>
+            : null
+        }
     </>
 };
 
 const TaskNote = () => {
+    const { user, setUser } = useContext(apiContext);
     const task = useSelector(currentTask);
     const [stateTaskForm, setStateTaskForm] = useState(false);
     const dispatch = useDispatch();
     const compliteTask = (id) => () => {
-        dispatch(setTaskStatus({id, status: 'succefull'}))
+        const newExpUser = task.reward + user.exp;
+        if (newExpUser >= user.expNextLvl) {
+            setUser({...user, expNextLvl: Math.ceil(user.expNextLvl * 1.2), exp: newExpUser - user.expNextLvl, level: user.level + 1});
+        } else {
+            setUser({...user, exp: newExpUser});
+        };
+        dispatch(setTaskStatus({id, status: 'succefull'}));
     };
     const removeTask = (id) => () => {
         dispatch(deleteTask(id));

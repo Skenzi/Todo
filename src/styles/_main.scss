@@ -24,7 +24,10 @@
     height: 100vh;
 }
 .bg-main {
-    background-color: burlywood;
+    background-color: rgb(222, 184, 135);
+    &-dark {
+        background-color: rgb(204, 169, 122);
+    }
 }
 .table-background {
     background-image: url('../images/table-background.jpg');

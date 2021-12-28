@@ -1,12 +1,12 @@
 .button {
     padding: 15px 10px;
     font-family: inherit;
-    text-align: center;
     cursor: pointer;
     &-sm {
         padding: 5px;
     }
     &-bar {
+        min-width: 150px;
         display: inline-block;
         box-shadow: 0 5px 10px black;
         background-color: #ffe4cd;
@@ -14,11 +14,15 @@
         color: black;
         &:hover {
             background-color: #ffe4cd;
-            box-shadow: none;
+            box-shadow: 0 2px 10px;
         }
         &:nth-child(1n+2) {
             margin-left: 20px;
         }
+    }
+    &-outline {
+        background-color: transparent;
+        padding: 0;
     }
     &-with-img {
         width: 80px;

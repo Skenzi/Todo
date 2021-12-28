@@ -8,11 +8,12 @@
             padding: 0;
             background-color: transparent;
             top: -25px;
-            right: -20px;
+            right: 0;
         }
     }
     &-body {
         width: 80%;
+        height: 60%;
         margin: 10% auto 0 auto;
         & .form-control {
             background-color: rgba(0, 0, 0, .2);
@@ -47,6 +48,8 @@
         text-overflow: ellipsis;
     }
     &-text {
+        height: 80%;
+        overflow-y: auto;
         word-break: break-all;
     }
 }
