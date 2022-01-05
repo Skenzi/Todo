@@ -6,7 +6,7 @@ import apiContext from "../context";
 import ProfileMenu from "./ProfileMenu.jsx";
 
 const Header = () => {
-    const {user, logOut} = useContext(apiContext);
+    const {user} = useContext(apiContext);
     return <header className="header bg-main">
         <div className="header-item"><img src={logo} alt="logo" className="logo" /></div>
         <nav className="header-item">

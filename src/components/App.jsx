@@ -10,22 +10,12 @@ import ModalTaskForm from "./ModalFormTask.jsx";
 import apiContext from "../context/index.js";
 import { useState } from "react";
 import LoginPage from "./pages/LoginPage.jsx";
-import { fetchTasks } from "../store/slices/tasksSlice.js";
-import { useEffect } from "react";
 
 const App = () => {
     const emptyUser = {
         username: null,
     };
-    const dispatch = useDispatch();
-    const [user, setUser] = useState({});
-    useEffect(() => {
-        if (user.username) {
-            dispatch(fetchTasks(user.tasks));
-        } else {
-            dispatch(fetchTasks([]));
-        }
-    }, [user]);
+    const [user, setUser] = useState(emptyUser);
     const logOut = () => {
         setUser(emptyUser);
     };

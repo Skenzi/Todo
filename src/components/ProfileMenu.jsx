@@ -2,17 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import apiContext from "../context";
+import { useSelector } from "react-redux";
+import { userSelector } from "../store/selectors";
 
 const ProfileMenu = () => {
     const {user, logOut} = useContext(apiContext);
+    const userData = useSelector(userSelector);
     return <div className="header-item">
         <button type="button" className="button button-bar button-dropdown" onClick={(ev) => ev.target.nextElementSibling.classList.toggle('show')}>{user.username}</button>
         <nav className="dropdown-menu bg-main-dark">
             <li>
                 <div className="dropdown-menu-item">
-                    <div>{user.username}</div>
-                    <div>Lvl: {user.level}</div>
-                    <div>Exp: {user.exp}</div>
+                    <div>{userData.username}</div>
+                    <div>Lvl: {userData.level}</div>
+                    <div>Exp: {userData.exp}</div>
                 </div>
             </li>
             <li>

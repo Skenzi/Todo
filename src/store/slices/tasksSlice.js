@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import _ from 'lodash';
+import { fetchUserData } from "./userSlice";
 
 const tasksSlice = createSlice({
     name: 'tasksInfo',
@@ -9,9 +10,6 @@ const tasksSlice = createSlice({
         currentTask: null,
     },
     reducers: {
-        fetchTasks: (state, { payload }) => {
-            state.tasks = payload;
-        },
         addTask: (state, { payload }) => {
             const date = new Date();
             const day = date.getTime();
@@ -43,10 +41,16 @@ const tasksSlice = createSlice({
             const currentTask = state.tasks.find(({ id }) => payload.id === id);
             const currentTaskId = state.tasks.indexOf(currentTask);
             state.tasks[currentTaskId] = {...currentTask, status: payload.status};
+            console.log(state.tasks, 'succ')
+        }
+    },
+    extraReducers: {
+        [fetchUserData]: (state, { payload }) => {
+            state.tasks = payload.tasks;
         }
     }
 });
 
-export const { addTask, deleteTask, setCurrentTaskId, fetchTasks, setTaskStatus, checkTasks, setTaskText } = tasksSlice.actions;
+export const { addTask, deleteTask, setCurrentTaskId, setTaskStatus, checkTasks, setTaskText } = tasksSlice.actions;
 
 export default tasksSlice.reducer;
