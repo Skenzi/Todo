@@ -8,10 +8,10 @@ import { addTask } from '../store/slices/tasksSlice.js';
 const ModalTaskForm = () => {
     const { elements } = useContext(apiContext);
     const modalState = useSelector(modalSelector);
-    const [taskData, setTaskData] = useState({name: '', text: '', dateEnd: ''});
+    const [taskData, setTaskData] = useState({name: '', text: '', dateEnd: '', reward: 0});
     const dispatch = useDispatch();
     const closeModal = () => {
-        setTaskData({name: '', text: '', dateEnd: ''});
+        setTaskData({name: '', text: '', dateEnd: '', reward: 0});
         dispatch(setStateModal(false));
         elements.body.classList.remove('modal-open');
     };
@@ -27,15 +27,19 @@ const ModalTaskForm = () => {
             <form className="form" onSubmit={onSubmit}>
                 <div className="form-group">
                     <label htmlFor="quest-name" className="form-label">Name</label>
-                    <input name="quest-name" className="form-control" required type="text" value={taskData.name} onChange={(e) => setTaskData({...taskData, name: e.currentTarget.value})}></input>
+                    <input id="quest-name" className="form-control" required type="text" value={taskData.name} onChange={(e) => setTaskData({...taskData, name: e.currentTarget.value})}></input>
                 </div>
                 <div className="form-group">
                     <label htmlFor="quest-text" className="form-label">Text</label>
-                    <textarea name="quest-text" className="form-control" rows="5" required value={taskData.text} onChange={(e) => setTaskData({...taskData, text: e.currentTarget.value})}></textarea>
+                    <textarea id="quest-text" className="form-control" rows="5" required value={taskData.text} onChange={(e) => setTaskData({...taskData, text: e.currentTarget.value})}></textarea>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="quest-reward" className="form-label">Reward</label>
+                    <input id="quest-reward" className="form-control" required type="text" value={taskData.reward} onChange={(e) => setTaskData({...taskData, reward: e.currentTarget.value})}></input>
                 </div>
                 <div className="form-group">
                     <label htmlFor="quest-text" className="form-label">Срок</label>
-                    <input name="quest-text" className="form-control" required value={taskData.dateEnd} type="date" onChange={(e) => setTaskData({...taskData, dateEnd: e.currentTarget.value})}></input>
+                    <input id="quest-text" className="form-control" required value={taskData.dateEnd} type="date" onChange={(e) => setTaskData({...taskData, dateEnd: e.currentTarget.value})}></input>
                 </div>
                 <div className="button-group">
                     <button type="submit" className="button button-submit">Add</button>
