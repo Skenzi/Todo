@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './Header.jsx';
-import Tasks from './pages/Tasks.jsx';
+import TasksPage from './pages/TasksPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 import ModalTaskForm from './ModalTaskForm.jsx';
 import apiContext from '../context/index';
@@ -12,7 +12,6 @@ function App() {
     username: null,
   };
   const [user, setUser] = useState(emptyUser);
-  const [typeTasks, setTypeTasks] = useState('active');
   const logOut = () => {
     setUser(emptyUser);
   };
@@ -30,10 +29,10 @@ function App() {
   return (
     <apiContext.Provider value={memoizedValue}>
       <Router>
-        <Header setTypeTasks={setTypeTasks} />
-        <main className="flex-container main table-background">
+        <Header />
+        <main className="flex-container main table-background flex-column">
           <Routes>
-            <Route exact path="/" element={<Tasks typeTasks={typeTasks} />} />
+            <Route exact path="/" element={<TasksPage />} />
             <Route exact path="/loginPage" element={<LoginPage />} />
             <Route exact path="*" element={<NotFoundPage />} />
           </Routes>

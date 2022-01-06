@@ -11,6 +11,9 @@
             right: 0;
         }
     }
+    &-buttons {
+        width: 20%;
+    }
     &-body {
         width: 80%;
         height: 60%;
@@ -66,6 +69,7 @@
 }
 .tasks {
     width: 20%;
+    height: 60vh;
     padding: 10px;
     border: 1px solid rgb(112, 92, 66);
     overflow: auto;
