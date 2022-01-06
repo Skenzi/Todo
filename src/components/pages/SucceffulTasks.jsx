@@ -1,15 +1,17 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import ListTasks from "../ListTasks.jsx";
-import TaskNote from "../TaskNote.jsx";
-import { currentTask } from '../../store/selectors/index.js';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import ListTasks from '../ListTasks.jsx';
+import TaskNote from '../TaskNote.jsx';
+import { currentTask } from '../../store/selectors/index';
 
-const SuccefullTasks = () => {
-    const task = useSelector(currentTask);
-    return <>
-        <ListTasks currentTasksStatus="succefull" />
-        {task && task.status === 'succefull' ? <TaskNote /> : null}
-    </>;
+function SuccefullTasks() {
+  const task = useSelector(currentTask);
+  return (
+    <>
+      <ListTasks currentTasksStatus="succefull" />
+      {task && task.status === 'succefull' ? <TaskNote /> : null}
+    </>
+  );
 }
 
 export default SuccefullTasks;

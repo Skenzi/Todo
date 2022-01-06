@@ -1,11 +1,10 @@
-import React from "react";
-import LoginPage from "./pages/LoginPage.jsx";
-import apiContext from "../context/index.js";
-import { useContext } from "react";
+import React, { useContext } from 'react';
+import LoginPage from './pages/LoginPage.jsx';
+import apiContext from '../context/index';
 
-const PrivateRoute = ({ children }) => {
-    const {user} = useContext(apiContext);
-    return user.username && user.password ? children : <LoginPage />;
-};
+function PrivateRoute({ children }) {
+  const { user } = useContext(apiContext);
+  return user.username && user.password ? children : <LoginPage />;
+}
 
 export default PrivateRoute;

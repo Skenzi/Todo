@@ -1,4 +1,6 @@
 # Todo
+[![Maintainability](https://api.codeclimate.com/v1/badges/0137d6d8ef33771f3b81/maintainability)](https://codeclimate.com/github/Skenzi/Todo/maintainability)
+[![NodeCI](https://github.com/Skenzi/Todo/workflows/NodeCi/badge.svg)](https://github.com/Skenzi/Todo/actions)
 
 Todo in rpg style. Used React, Redux
 
