@@ -14,14 +14,8 @@ function ProfileMenu() {
         <li>
           <div className="dropdown-menu-item">
             <div>{userData.username}</div>
-            <div>
-              Lvl:
-              {userData.level}
-            </div>
-            <div>
-              Exp:
-              {userData.exp}
-            </div>
+            <div>{`Lvl: ${userData.level}`}</div>
+            <div>{`Exp: ${userData.exp}`}</div>
           </div>
         </li>
         <li>

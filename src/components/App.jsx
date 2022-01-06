@@ -1,9 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './Header.jsx';
-import AllTasks from './pages/AllTasks.jsx';
-import SuccefullTasks from './pages/SucceffulTasks.jsx';
-import FailedTasks from './pages/FailedTasks.jsx';
+import Tasks from './pages/Tasks.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 import ModalTaskForm from './ModalFormTask.jsx';
 import apiContext from '../context/index';
@@ -14,6 +12,7 @@ function App() {
     username: null,
   };
   const [user, setUser] = useState(emptyUser);
+  const [typeTasks, setTypeTasks] = useState('active');
   const logOut = () => {
     setUser(emptyUser);
   };
@@ -31,12 +30,10 @@ function App() {
   return (
     <apiContext.Provider value={memoizedValue}>
       <Router>
-        <Header />
+        <Header setTypeTasks={setTypeTasks} />
         <main className="flex-container main table-background">
           <Routes>
-            <Route exact path="/succefullTasks" element={<SuccefullTasks />} />
-            <Route exact path="/failedTasks" element={<FailedTasks />} />
-            <Route exact path="/" element={<AllTasks />} />
+            <Route exact path="/" element={<Tasks typeTasks={typeTasks} />} />
             <Route exact path="/loginPage" element={<LoginPage />} />
             <Route exact path="*" element={<NotFoundPage />} />
           </Routes>
