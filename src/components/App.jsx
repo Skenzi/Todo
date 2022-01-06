@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './Header.jsx';
 import Tasks from './pages/Tasks.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
-import ModalTaskForm from './ModalFormTask.jsx';
+import ModalTaskForm from './ModalTaskForm.jsx';
 import apiContext from '../context/index';
 import LoginPage from './pages/LoginPage.jsx';
 

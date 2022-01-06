@@ -6,6 +6,31 @@ import { checkTasks } from '../../store/slices/tasksSlice';
 import { fetchUserData } from '../../store/slices/userSlice';
 import users from '../../store/users';
 
+function LoginForm({
+  onChange, error, dataLogin, onSubmit,
+}) {
+  return (
+    <form className="form bg-main" onSubmit={onSubmit}>
+      <div className="form-title">Вход в систему</div>
+      <div className="form-body">
+        <div className="form-group">
+          <label htmlFor="username" className="form-label">Имя пользователя</label>
+          <input id="username" value={dataLogin.username} onChange={onChange('username')} type="text" className="form-control" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password" className="form-label">Пароль</label>
+          <input id="password" value={dataLogin.password} onChange={onChange('password')} type="password" className="form-control" />
+        </div>
+        {error ? <div className="text-error">{error}</div> : null}
+        <button type="submit" className="button button-sm button-submit">Войти</button>
+      </div>
+      <div className="form-footer">
+        <Link to="/signUpPage" type="button" className="button button-sm">Уже зарегистрированы?</Link>
+      </div>
+    </form>
+  );
+}
+
 function LoginPage() {
   const api = useContext(apiContext);
   const dispatch = useDispatch();
@@ -31,24 +56,7 @@ function LoginPage() {
   };
   return (
     <div className="container-sm">
-      <form className="form bg-main" onSubmit={onSubmit}>
-        <div className="form-title">Вход в систему</div>
-        <div className="form-body">
-          <div className="form-group">
-            <label htmlFor="username" className="form-label">Имя пользователя</label>
-            <input id="username" value={dataLogin.username} onChange={onChange('username')} type="text" className="form-control" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password" className="form-label">Пароль</label>
-            <input id="password" value={dataLogin.password} onChange={onChange('password')} type="password" className="form-control" />
-          </div>
-          {error ? <div className="text-error">{error}</div> : null}
-          <button type="submit" className="button button-sm button-submit">Войти</button>
-        </div>
-        <div className="form-footer">
-          <Link to="/signUpPage" type="button" className="button button-sm">Уже зарегистрированы?</Link>
-        </div>
-      </form>
+      <LoginForm onChange={onChange} error={error} dataLogin={dataLogin} onSubmit={onSubmit} />
     </div>
   );
 }
