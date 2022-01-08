@@ -4,8 +4,12 @@
     cursor: pointer;
     &-sm {
         padding: 5px;
+        min-width: 15%;
     }
-    &-task {
+    &-md {
+        min-width: 35%;
+    }
+    &-lg {
         width: 100%,
     }
     &-bar {
@@ -18,9 +22,6 @@
         &:hover {
             background-color: #ffe4cd;
             box-shadow: 0 2px 10px;
-        }
-        &:nth-child(1n+2) {
-            margin-left: 20px;
         }
     }
     &-outline {
@@ -39,4 +40,11 @@
 }
 .buttons-group {
     display: flex;
+    & .button:nth-child(1n+2) {
+        margin-left: 5px;
+        &.flex-column {
+            margin: 0;
+            margin-top: 5px;
+        }
+    }
 }

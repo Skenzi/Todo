@@ -7,9 +7,9 @@ import { currentTask } from '../../store/selectors/index.js';
 function TasksButtons({ setTypeTasks }) {
   return (
     <div className="f-row buttons-group">
-      <button type="button" onClick={() => setTypeTasks('active')} className="button button-task">Active</button>
-      <button type="button" onClick={() => setTypeTasks('succefull')} className="button button-task">Complited</button>
-      <button type="button" onClick={() => setTypeTasks('failed')} className="button button-task">Failed</button>
+      <button type="button" onClick={() => setTypeTasks('active')} className="button button-bar button-lg">Active</button>
+      <button type="button" onClick={() => setTypeTasks('succefull')} className="button button-bar button-lg">Complited</button>
+      <button type="button" onClick={() => setTypeTasks('failed')} className="button button-bar button-lg">Failed</button>
     </div>
   );
 }

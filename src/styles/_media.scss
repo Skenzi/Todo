@@ -16,6 +16,9 @@
     }
 }
 @media screen and (max-width: 426px) {
+    .f-row {
+        flex-direction: column;
+    }
     .header {
         flex-direction: column;
         &-item {
@@ -27,6 +30,24 @@
             & .button-bar {
                 margin-left: 0;
                 margin-top: 5px;
+            }
+        }
+    }
+    .buttons-group {
+        flex-wrap: wrap;
+        & .button {
+            &:nth-child(1n+2) {
+                margin: 0;
+                margin-top: 5px;
+            }
+            &-sm {
+                width: 100%;
+            }
+            &-md {
+                width: 100%;
+            }
+            &-lg {
+                width: 100%,
             }
         }
     }

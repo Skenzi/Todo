@@ -4,6 +4,12 @@
 .flex-column {
     flex-direction: column;
 }
+.f-row {
+    display: flex;
+    &:nth-child(1n+2) {
+        margin-top: 10px;
+    }
+}
 .container-lg {
     max-width: 1320px;
     margin: 0 auto;

@@ -1,9 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import apiContext from '../../context';
-import { checkTasks } from '../../store/slices/tasksSlice';
-import { fetchUserData } from '../../store/slices/userSlice';
 import users from '../../store/users';
 
 function LoginForm({
@@ -33,7 +30,6 @@ function LoginForm({
 
 function LoginPage() {
   const api = useContext(apiContext);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [dataLogin, setDataLogin] = useState({ username: '', password: '' });
@@ -44,8 +40,6 @@ function LoginPage() {
     );
     if (currUser) {
       api.setUser({ username: currUser.username });
-      dispatch(fetchUserData(currUser));
-      dispatch(checkTasks());
       navigate('/', { replace: true });
     } else {
       setError('Такого пользователя нет');

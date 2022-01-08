@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { tasksActiveSelector, tasksSuccefullSelector, tasksFailedSelector } from '../store/selectors';
-import { setCurrentTaskId } from '../store/slices/tasksSlice';
+import { checkTasks, setCurrentTaskId } from '../store/slices/tasksSlice';
 import { setStateModal } from '../store/slices/modalSlice';
 import apiContext from '../context/index';
+import users from '../store/users';
+import { fetchUserData } from '../store/slices/userSlice';
 
 const tasksSelectors = {
   active: tasksActiveSelector,
@@ -12,9 +14,16 @@ const tasksSelectors = {
 };
 
 function ListTasks({ currentTasksStatus }) {
-  const { elements } = useContext(apiContext);
-  const tasks = useSelector(tasksSelectors[currentTasksStatus]);
   const dispatch = useDispatch();
+  const { elements, user } = useContext(apiContext);
+  useEffect(() => {
+    const currUser = users.find((userItem) => user.username === userItem.username);
+    if (currUser) {
+      dispatch(fetchUserData(currUser));
+      dispatch(checkTasks());
+    }
+  }, []);
+  const tasks = useSelector(tasksSelectors[currentTasksStatus]);
   const setModal = () => {
     dispatch(setStateModal(true));
     elements.body.classList.add('modal-open');
