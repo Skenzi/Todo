@@ -8,7 +8,7 @@ function ProfileMenu() {
   const { user, logOut } = useContext(apiContext);
   const userData = useSelector(userSelector);
   return (
-    <div className="header-item">
+    <>
       <button type="button" className="button button-bar button-dropdown" onClick={(ev) => ev.target.nextElementSibling.classList.toggle('show')}>{user.username}</button>
       <nav className="dropdown-menu bg-main-dark">
         <li>
@@ -31,7 +31,7 @@ function ProfileMenu() {
           <button type="button" className="button button-outline dropdown-menu-item" onClick={logOut}>Выйти</button>
         </li>
       </nav>
-    </div>
+    </>
   );
 }
 

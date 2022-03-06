@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import apiContext from '../../context';
 import users from '../../store/users';
 
-function LoginForm({
+function SigUpForm({
   onChange, error, dataLogin, onSubmit,
 }) {
   return (
@@ -18,31 +18,47 @@ function LoginForm({
           <label htmlFor="password" className="form-label">Пароль</label>
           <input id="password" value={dataLogin.password} onChange={onChange('password')} type="password" className="form-control" />
         </div>
+        <div className="form-group">
+          <label htmlFor="confirmPassword" className="form-label">Подтвредите пароль</label>
+          <input id="confirmPassword" value={dataLogin.confirmPassword} onChange={onChange('confirmPassword')} type="password" className="form-control" />
+        </div>
         {error ? <div className="text-error">{error}</div> : null}
-        <button type="submit" className="button button-sm button-submit">Войти</button>
+        <button type="submit" className="button button-sm button-submit">Зарегистрироваться</button>
       </div>
       <div className="form-footer">
-        <Link to="/signUpPage" type="button" className="button button-sm">Не зарегистрированы?</Link>
+        <Link to="/signUpPage" type="button" className="button button-sm">Уже зарегистрированы?</Link>
       </div>
     </form>
   );
 }
 
-function LoginPage() {
+function SignUpPage() {
   const api = useContext(apiContext);
   const navigate = useNavigate();
   const [error, setError] = useState(null);
-  const [dataLogin, setDataLogin] = useState({ username: '', password: '' });
+  const [dataLogin, setDataLogin] = useState({ username: '', password: '', confirmPassword: '' });
   const onSubmit = (ev) => {
     ev.preventDefault();
-    const currUser = users.find(
-      (user) => user.username === dataLogin.username && user.password === dataLogin.password,
-    );
-    if (currUser) {
-      api.setUser({ username: currUser.username });
-      navigate('/', { replace: true });
+    if (dataLogin.password !== dataLogin.confirmPassword) {
+      setError('Пароли не совпадают');
+      return;
+    }
+    const isExistUser = users.find((user) => user.username === dataLogin.username);
+    if (isExistUser) {
+      setError('Такой уже есть');
     } else {
-      setError('Такого пользователя нет');
+      const newUser = {
+        username: dataLogin.username,
+        password: dataLogin.password,
+        level: 1,
+        exp: 0,
+        expNextLvl: 100,
+        status: { int: 10, str: 10, agi: 10 },
+        tasks: [],
+      };
+      users.push(newUser);
+      api.setUser({ username: newUser.username });
+      navigate('/', { replace: true });
     }
   };
   const onChange = (dataKey) => (ev) => {
@@ -50,9 +66,9 @@ function LoginPage() {
   };
   return (
     <div className="container-sm">
-      <LoginForm onChange={onChange} error={error} dataLogin={dataLogin} onSubmit={onSubmit} />
+      <SigUpForm onChange={onChange} error={error} dataLogin={dataLogin} onSubmit={onSubmit} />
     </div>
   );
 }
 
-export default LoginPage;
+export default SignUpPage;
