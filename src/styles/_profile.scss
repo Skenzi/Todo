@@ -1,0 +1,19 @@
+.profile {
+    display: flex;
+    padding: 20px;
+    &__img {
+        width: 150px;
+        height: 150px;
+        background-color: aquamarine;
+    }
+    &__data {
+        margin-left: 10px;
+        & .data__item:nth-child(1n+2) {
+            margin-top: 5px;
+        }
+        & .data__header {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    }
+}

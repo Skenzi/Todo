@@ -4,8 +4,6 @@ import { tasksActiveSelector, tasksSuccefullSelector, tasksFailedSelector } from
 import { checkTasks, setCurrentTaskId } from '../store/slices/tasksSlice';
 import { setStateModal } from '../store/slices/modalSlice';
 import apiContext from '../context/index';
-import users from '../store/users';
-import { fetchUserData } from '../store/slices/userSlice';
 
 const tasksSelectors = {
   active: tasksActiveSelector,
@@ -15,13 +13,9 @@ const tasksSelectors = {
 
 function ListTasks({ currentTasksStatus }) {
   const dispatch = useDispatch();
-  const { elements, user } = useContext(apiContext);
+  const { elements } = useContext(apiContext);
   useEffect(() => {
-    const currUser = users.find((userItem) => user.username === userItem.username);
-    if (currUser) {
-      dispatch(fetchUserData(currUser));
-      dispatch(checkTasks());
-    }
+    dispatch(checkTasks());
   }, []);
   const tasks = useSelector(tasksSelectors[currentTasksStatus]);
   const setModal = () => {

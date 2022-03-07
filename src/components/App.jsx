@@ -7,6 +7,7 @@ import ModalTaskForm from './ModalTaskForm.jsx';
 import apiContext from '../context/index';
 import LoginPage from './pages/LoginPage.jsx';
 import SignUpPage from './pages/SignUpPage.jsx';
+import ProfilePage from './pages/ProfilePage.jsx';
 
 function App() {
   const emptyUser = {
@@ -36,6 +37,7 @@ function App() {
             <Route exact path="/" element={<TasksPage />} />
             <Route exact path="/loginPage" element={<LoginPage />} />
             <Route exact path="/signUpPage" element={<SignUpPage />} />
+            <Route exact path="/profilePage" element={<ProfilePage />} />
             <Route exact path="*" element={<NotFoundPage />} />
           </Routes>
         </main>

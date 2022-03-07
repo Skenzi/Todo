@@ -7,6 +7,7 @@ const userSlice = createSlice({
     level: 1,
     exp: 0,
     expNextLvl: 100,
+    stats: {},
   },
   reducers: {
     fetchUserData: (state, { payload }) => {
@@ -14,6 +15,7 @@ const userSlice = createSlice({
       state.exp = payload.exp;
       state.level = payload.level;
       state.expNextLvl = payload.expNextLvl;
+      state.stats = payload.stats;
     },
     setLevel: (state, { payload }) => {
       state.level = payload.level;
