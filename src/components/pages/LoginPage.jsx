@@ -55,7 +55,7 @@ function LoginPage() {
   return (
     <div className="container-sm">
       <LoginForm
-        onChange={onChangeDataLogin}
+        onChangeDataLogin={onChangeDataLogin}
         error={error}
         dataLogin={dataLogin}
         onSubmit={onSubmit}

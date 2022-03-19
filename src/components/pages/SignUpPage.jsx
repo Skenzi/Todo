@@ -67,7 +67,7 @@ function SignUpPage() {
   return (
     <div className="container-sm">
       <SigUpForm
-        onChange={onChangeDataForm}
+        onChangeDataLogin={onChangeDataForm}
         error={error}
         dataLogin={dataLogin}
         onSubmit={onSubmit}

@@ -34,11 +34,9 @@ const tasksSlice = createSlice({
     setCurrentTaskId: (state, { payload }) => {
       state.currentTaskId = payload;
     },
-    setTaskText: (state, { payload }) => {
-      state.tasks[state.currentTaskId] = { ...state.currentTask, text: payload.newText };
-    },
-    setTaskStatus: (state, { payload }) => {
-      state.tasks[state.currentTaskId] = { ...state.currentTask, status: payload.status };
+    setTaskProperty: (state, { payload }) => {
+      const currentTask = state.tasks.find((task) => payload.id === task.id);
+      currentTask[payload.property] = payload.value;
     },
   },
   extraReducers: {
@@ -49,7 +47,7 @@ const tasksSlice = createSlice({
 });
 
 export const {
-  addTask, deleteTask, setCurrentTaskId, setTaskStatus, checkTasks, setTaskText,
+  addTask, deleteTask, setCurrentTaskId, checkTasks, setTaskProperty,
 } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

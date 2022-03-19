@@ -4,7 +4,7 @@ import { currentTask, userSelector } from '../store/selectors/index';
 import paper from '../images/paper.png';
 import seal from '../images/seal.png';
 import handWithPen from '../images/handWithPen.png';
-import { setTaskStatus, deleteTask, setTaskText } from '../store/slices/tasksSlice.js';
+import { deleteTask, setTaskProperty } from '../store/slices/tasksSlice.js';
 import { setLevel, setExp, setStat } from '../store/slices/userSlice.js';
 
 function TaskForm({ task, setStateTaskForm }) {
@@ -12,7 +12,7 @@ function TaskForm({ task, setStateTaskForm }) {
   const [newText, setText] = useState(task.text);
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(setTaskText({ id: task.id, newText }));
+    dispatch(setTaskProperty({ id: task.id, property: 'text', value: newText }));
     setStateTaskForm(false);
   };
   return (
@@ -24,7 +24,7 @@ function TaskForm({ task, setStateTaskForm }) {
   );
 }
 
-function TaskBody({ task, compliteTask, setStateTaskForm }) {
+function TaskBody({ task, setStateTaskForm, compliteTask }) {
   return (
     <>
       <div className="task-text">{task.text}</div>
@@ -68,7 +68,7 @@ function TaskNote() {
       dispatch(setExp(newExpUser));
     }
     dispatch(setStat(task.stat));
-    dispatch(setTaskStatus({ id: task.id, status: 'succefull' }));
+    dispatch(setTaskProperty({ id: task.id, property: 'status', value: 'succefull' }));
   };
   const removeTask = (id) => () => {
     dispatch(deleteTask(id));
@@ -85,9 +85,9 @@ function TaskNote() {
           ? <TaskForm task={task} setStateTaskForm={setStateTaskForm} />
           : (
             <TaskBody
+              compliteTask={compliteTask}
               setStateTaskForm={setStateTaskForm}
               task={task}
-              compliteTask={compliteTask}
             />
           )}
       </div>

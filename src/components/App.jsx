@@ -9,6 +9,20 @@ import LoginPage from './pages/LoginPage.jsx';
 import SignUpPage from './pages/SignUpPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 
+function Main() {
+  return (
+    <main className="flex-container main table-background flex-column">
+      <Routes>
+        <Route exact path="/" element={<TasksPage />} />
+        <Route exact path="/loginPage" element={<LoginPage />} />
+        <Route exact path="/signUpPage" element={<SignUpPage />} />
+        <Route exact path="/profilePage" element={<ProfilePage />} />
+        <Route exact path="*" element={<NotFoundPage />} />
+      </Routes>
+    </main>
+  );
+}
+
 function App() {
   const emptyUser = {
     username: null,
@@ -32,15 +46,7 @@ function App() {
     <apiContext.Provider value={memoizedValue}>
       <Router>
         <Header />
-        <main className="flex-container main table-background flex-column">
-          <Routes>
-            <Route exact path="/" element={<TasksPage />} />
-            <Route exact path="/loginPage" element={<LoginPage />} />
-            <Route exact path="/signUpPage" element={<SignUpPage />} />
-            <Route exact path="/profilePage" element={<ProfilePage />} />
-            <Route exact path="*" element={<NotFoundPage />} />
-          </Routes>
-        </main>
+        <Main />
       </Router>
       <ModalTaskForm />
     </apiContext.Provider>
