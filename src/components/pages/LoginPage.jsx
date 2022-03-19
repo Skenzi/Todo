@@ -4,22 +4,36 @@ import { useNavigate, Link } from 'react-router-dom';
 import apiContext from '../../context';
 import users from '../../store/users';
 import { fetchUserData } from '../../store/slices/userSlice';
+import GroupControls from '../GroupControl.jsx';
+
+const groupControls = [
+  {
+    name: 'password',
+    labelText: 'Пароль',
+    type: 'password',
+  },
+  {
+    name: 'username',
+    labelText: 'Имя пользователя',
+    type: 'text',
+  },
+];
 
 function LoginForm({
-  onChangeDataLogin, error, dataLogin, onSubmit,
+  onChangeDataForm, error, dataLogin, onSubmit,
 }) {
   return (
     <form className="form bg-main" onSubmit={onSubmit}>
       <div className="form-title">Вход в систему</div>
       <div className="form-body">
-        <div className="form-group">
-          <label htmlFor="username" className="form-label">Имя пользователя</label>
-          <input id="username" value={dataLogin.username} onChange={onChangeDataLogin('username')} type="text" className="form-control" />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password" className="form-label">Пароль</label>
-          <input id="password" value={dataLogin.password} onChange={onChangeDataLogin('password')} type="password" className="form-control" />
-        </div>
+        {groupControls.map((item) => (
+          <GroupControls
+            key={item.name}
+            infoControl={item}
+            dataLogin={dataLogin}
+            onChangeDataForm={onChangeDataForm}
+          />
+        ))}
         {error ? <div className="text-error">{error}</div> : null}
         <button type="submit" className="button button-sm button-submit">Войти</button>
       </div>
@@ -49,13 +63,13 @@ function LoginPage() {
       setError('Такого пользователя нет');
     }
   };
-  const onChangeDataLogin = (dataKey) => (ev) => {
+  const onChangeDataForm = (dataKey) => (ev) => {
     setDataLogin({ ...dataLogin, [dataKey]: ev.target.value });
   };
   return (
     <div className="container-sm">
       <LoginForm
-        onChangeDataLogin={onChangeDataLogin}
+        onChangeDataForm={onChangeDataForm}
         error={error}
         dataLogin={dataLogin}
         onSubmit={onSubmit}

@@ -2,6 +2,25 @@ import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import apiContext from '../../context';
 import users from '../../store/users';
+import GroupControls from '../GroupControl.jsx';
+
+const groupControls = [
+  {
+    name: 'username',
+    labelText: 'Имя пользователя',
+    type: 'text',
+  },
+  {
+    name: 'password',
+    labelText: 'Пароль',
+    type: 'password',
+  },
+  {
+    name: 'confirmPassword',
+    labelText: 'Подтвредите пароль',
+    type: 'password',
+  },
+];
 
 function SigUpForm({
   onChangeDataForm, error, dataLogin, onSubmit,
@@ -10,18 +29,14 @@ function SigUpForm({
     <form className="form bg-main" onSubmit={onSubmit}>
       <div className="form-title">Вход в систему</div>
       <div className="form-body">
-        <div className="form-group">
-          <label htmlFor="username" className="form-label">Имя пользователя</label>
-          <input id="username" value={dataLogin.username} onChange={onChangeDataForm('username')} type="text" className="form-control" />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password" className="form-label">Пароль</label>
-          <input id="password" value={dataLogin.password} onChange={onChangeDataForm('password')} type="password" className="form-control" />
-        </div>
-        <div className="form-group">
-          <label htmlFor="confirmPassword" className="form-label">Подтвредите пароль</label>
-          <input id="confirmPassword" value={dataLogin.confirmPassword} onChange={onChangeDataForm('confirmPassword')} type="password" className="form-control" />
-        </div>
+        {groupControls.map((item) => (
+          <GroupControls
+            key={item.name}
+            infoControl={item}
+            dataLogin={dataLogin}
+            onChangeDataForm={onChangeDataForm}
+          />
+        ))}
         {error ? <div className="text-error">{error}</div> : null}
         <button type="submit" className="button button-sm button-submit">Зарегистрироваться</button>
       </div>
@@ -36,20 +51,20 @@ function SignUpPage() {
   const api = useContext(apiContext);
   const navigate = useNavigate();
   const [error, setError] = useState(null);
-  const [dataLogin, setDataLogin] = useState({ username: '', password: '', confirmPassword: '' });
+  const [dataSignUp, setDataSignUp] = useState({ username: '', password: '', confirmPassword: '' });
   const onSubmit = (ev) => {
     ev.preventDefault();
-    if (dataLogin.password !== dataLogin.confirmPassword) {
+    if (dataSignUp.password !== dataSignUp.confirmPassword) {
       setError('Пароли не совпадают');
       return;
     }
-    const isExistUser = users.find((user) => user.username === dataLogin.username);
+    const isExistUser = users.find((user) => user.username === dataSignUp.username);
     if (isExistUser) {
       setError('Такой уже есть');
     } else {
       const newUser = {
-        username: dataLogin.username,
-        password: dataLogin.password,
+        username: dataSignUp.username,
+        password: dataSignUp.password,
         level: 1,
         exp: 0,
         expNextLvl: 100,
@@ -62,14 +77,14 @@ function SignUpPage() {
     }
   };
   const onChangeDataForm = (dataKey) => (ev) => {
-    setDataLogin({ ...dataLogin, [dataKey]: ev.target.value });
+    setDataSignUp({ ...dataSignUp, [dataKey]: ev.target.value });
   };
   return (
     <div className="container-sm">
       <SigUpForm
-        onChangeDataLogin={onChangeDataForm}
+        onChangeDataForm={onChangeDataForm}
         error={error}
-        dataLogin={dataLogin}
+        dataSignUp={dataSignUp}
         onSubmit={onSubmit}
       />
     </div>
