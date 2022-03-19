@@ -53,10 +53,17 @@ function TaskNote() {
   const [stateTaskForm, setStateTaskForm] = useState(false);
   const dispatch = useDispatch();
   const compliteTask = () => {
-    const newExpUser = task.reward + user.exp;
+    let newExpUser = task.reward + user.exp;
+    let expNextLvl = user.expNextLvl;
+    let level = user.level;
     if (newExpUser >= user.expNextLvl) {
-      dispatch(setLevel({ expNextLvl: Math.ceil(user.expNextLvl * 1.2), level: user.level + 1 }));
-      dispatch(setExp(newExpUser - user.expNextLvl));
+      while (expNextLvl <= newExpUser) {
+        newExpUser -= expNextLvl;
+        expNextLvl = Math.ceil(expNextLvl * 1.2);
+        level += 1;
+      }
+      dispatch(setLevel({ expNextLvl, level }));
+      dispatch(setExp(newExpUser));
     } else {
       dispatch(setExp(newExpUser));
     }
