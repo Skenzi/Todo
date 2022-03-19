@@ -1,8 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import apiContext from '../../context';
 import users from '../../store/users';
-import GroupControls from '../GroupControl.jsx';
+import FormLogin from '../FormLogin.jsx';
+import { fetchUserData } from '../../store/slices/userSlice';
 
 const groupControls = [
   {
@@ -22,33 +24,16 @@ const groupControls = [
   },
 ];
 
-function SigUpForm({
-  onChangeDataSignUp, error, dataLogin, onSubmit,
-}) {
-  return (
-    <form className="form bg-main" onSubmit={onSubmit}>
-      <div className="form-title">Вход в систему</div>
-      <div className="form-body">
-        {groupControls.map((item) => (
-          <GroupControls
-            key={item.name}
-            infoControl={item}
-            dataLogin={dataLogin}
-            onChangeDataForm={onChangeDataSignUp}
-          />
-        ))}
-        {error ? <div className="text-error">{error}</div> : null}
-        <button type="submit" className="button button-sm button-submit">Зарегистрироваться</button>
-      </div>
-      <div className="form-footer">
-        <Link to="/loginPage" type="button" className="button button-sm">Уже зарегистрированы?</Link>
-      </div>
-    </form>
-  );
-}
+const infoForm = {
+  title: 'Регистрация',
+  btnSubmitText: 'Зарегистрироваться',
+  btnLinkText: 'Уже зарегистрированы?',
+  groupControls,
+};
 
 function SignUpPage() {
   const api = useContext(apiContext);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [dataSignUp, setDataSignUp] = useState({ username: '', password: '', confirmPassword: '' });
@@ -73,6 +58,7 @@ function SignUpPage() {
       };
       users.push(newUser);
       api.setUser({ username: newUser.username });
+      dispatch(fetchUserData(newUser));
       navigate('/', { replace: true });
     }
   };
@@ -81,11 +67,12 @@ function SignUpPage() {
   };
   return (
     <div className="container-sm">
-      <SigUpForm
+      <FormLogin
         onChangeDataForm={onChangeDataSignUp}
         error={error}
-        dataSignUp={dataSignUp}
+        dataControls={dataSignUp}
         onSubmit={onSubmit}
+        infoForm={infoForm}
       />
     </div>
   );
