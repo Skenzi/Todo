@@ -6,7 +6,7 @@ import users from '../../store/users';
 import { fetchUserData } from '../../store/slices/userSlice';
 
 function LoginForm({
-  onChange, error, dataLogin, onSubmit,
+  onChangeDataLogin, error, dataLogin, onSubmit,
 }) {
   return (
     <form className="form bg-main" onSubmit={onSubmit}>
@@ -14,11 +14,11 @@ function LoginForm({
       <div className="form-body">
         <div className="form-group">
           <label htmlFor="username" className="form-label">Имя пользователя</label>
-          <input id="username" value={dataLogin.username} onChange={onChange('username')} type="text" className="form-control" />
+          <input id="username" value={dataLogin.username} onChange={onChangeDataLogin('username')} type="text" className="form-control" />
         </div>
         <div className="form-group">
           <label htmlFor="password" className="form-label">Пароль</label>
-          <input id="password" value={dataLogin.password} onChange={onChange('password')} type="password" className="form-control" />
+          <input id="password" value={dataLogin.password} onChange={onChangeDataLogin('password')} type="password" className="form-control" />
         </div>
         {error ? <div className="text-error">{error}</div> : null}
         <button type="submit" className="button button-sm button-submit">Войти</button>
@@ -49,12 +49,17 @@ function LoginPage() {
       setError('Такого пользователя нет');
     }
   };
-  const onChange = (dataKey) => (ev) => {
+  const onChangeDataLogin = (dataKey) => (ev) => {
     setDataLogin({ ...dataLogin, [dataKey]: ev.target.value });
   };
   return (
     <div className="container-sm">
-      <LoginForm onChange={onChange} error={error} dataLogin={dataLogin} onSubmit={onSubmit} />
+      <LoginForm
+        onChange={onChangeDataLogin}
+        error={error}
+        dataLogin={dataLogin}
+        onSubmit={onSubmit}
+      />
     </div>
   );
 }

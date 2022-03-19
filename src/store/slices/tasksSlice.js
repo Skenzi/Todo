@@ -35,14 +35,10 @@ const tasksSlice = createSlice({
       state.currentTaskId = payload;
     },
     setTaskText: (state, { payload }) => {
-      const currentTask = state.tasks.find(({ id }) => payload.id === id);
-      const currentTaskId = state.tasks.indexOf(currentTask);
-      state.tasks[currentTaskId] = { ...currentTask, text: payload.newText };
+      state.tasks[state.currentTaskId] = { ...state.currentTask, text: payload.newText };
     },
     setTaskStatus: (state, { payload }) => {
-      const currentTask = state.tasks.find(({ id }) => payload.id === id);
-      const currentTaskId = state.tasks.indexOf(currentTask);
-      state.tasks[currentTaskId] = { ...currentTask, status: payload.status };
+      state.tasks[state.currentTaskId] = { ...state.currentTask, status: payload.status };
     },
   },
   extraReducers: {
