@@ -18,15 +18,11 @@ function ProfileMenu() {
             <div>{`Exp: ${userData.exp}`}</div>
           </div>
         </li>
-        <li>
-          <hr className="dropdown-divider" />
-        </li>
+        <li><hr className="dropdown-divider" /></li>
         <li>
           <Link className="dropdown-menu-item" to="/profilePage">Профиль</Link>
         </li>
-        <li>
-          <hr className="dropdown-divider" />
-        </li>
+        <li><hr className="dropdown-divider" /></li>
         <li>
           <button type="button" className="button button-outline dropdown-menu-item" onClick={logOut}>Выйти</button>
         </li>

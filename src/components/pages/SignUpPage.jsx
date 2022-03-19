@@ -23,7 +23,7 @@ const groupControls = [
 ];
 
 function SigUpForm({
-  onChangeDataForm, error, dataLogin, onSubmit,
+  onChangeDataSignUp, error, dataLogin, onSubmit,
 }) {
   return (
     <form className="form bg-main" onSubmit={onSubmit}>
@@ -34,7 +34,7 @@ function SigUpForm({
             key={item.name}
             infoControl={item}
             dataLogin={dataLogin}
-            onChangeDataForm={onChangeDataForm}
+            onChangeDataForm={onChangeDataSignUp}
           />
         ))}
         {error ? <div className="text-error">{error}</div> : null}
@@ -76,13 +76,13 @@ function SignUpPage() {
       navigate('/', { replace: true });
     }
   };
-  const onChangeDataForm = (dataKey) => (ev) => {
+  const onChangeDataSignUp = (dataKey) => (ev) => {
     setDataSignUp({ ...dataSignUp, [dataKey]: ev.target.value });
   };
   return (
     <div className="container-sm">
       <SigUpForm
-        onChangeDataForm={onChangeDataForm}
+        onChangeDataForm={onChangeDataSignUp}
         error={error}
         dataSignUp={dataSignUp}
         onSubmit={onSubmit}

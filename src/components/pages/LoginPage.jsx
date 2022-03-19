@@ -20,7 +20,7 @@ const groupControls = [
 ];
 
 function LoginForm({
-  onChangeDataForm, error, dataLogin, onSubmit,
+  onChangeDataLogin, error, dataLogin, onSubmit,
 }) {
   return (
     <form className="form bg-main" onSubmit={onSubmit}>
@@ -31,7 +31,7 @@ function LoginForm({
             key={item.name}
             infoControl={item}
             dataLogin={dataLogin}
-            onChangeDataForm={onChangeDataForm}
+            onChangeDataForm={onChangeDataLogin}
           />
         ))}
         {error ? <div className="text-error">{error}</div> : null}
@@ -63,13 +63,13 @@ function LoginPage() {
       setError('Такого пользователя нет');
     }
   };
-  const onChangeDataForm = (dataKey) => (ev) => {
+  const onChangeDataLogin = (dataKey) => (ev) => {
     setDataLogin({ ...dataLogin, [dataKey]: ev.target.value });
   };
   return (
     <div className="container-sm">
       <LoginForm
-        onChangeDataForm={onChangeDataForm}
+        onChangeDataLogin={onChangeDataLogin}
         error={error}
         dataLogin={dataLogin}
         onSubmit={onSubmit}
