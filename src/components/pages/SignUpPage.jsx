@@ -26,7 +26,7 @@ function SigUpForm({
         <button type="submit" className="button button-sm button-submit">Зарегистрироваться</button>
       </div>
       <div className="form-footer">
-        <Link to="/signUpPage" type="button" className="button button-sm">Уже зарегистрированы?</Link>
+        <Link to="/loginPage" type="button" className="button button-sm">Уже зарегистрированы?</Link>
       </div>
     </form>
   );
