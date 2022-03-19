@@ -2,6 +2,31 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { userSelector } from '../../store/selectors';
 
+function DataItem({ value, property }) {
+  return (
+    <div className="data__item">
+      <span className="data__header">{property}</span>
+      {': '}
+      {value}
+    </div>
+  );
+}
+
+const userProperties = [
+  {
+    name: 'username',
+    property: 'Name',
+  },
+  {
+    name: 'level',
+    property: 'Level',
+  },
+  {
+    name: 'exp',
+    property: 'Experience',
+  },
+];
+
 function ProfilePage() {
   const user = useSelector(userSelector);
   const stats = Object.entries(user.stats);
@@ -9,28 +34,15 @@ function ProfilePage() {
     <div className="profile bg-main">
       <div className="profile__img" />
       <div className="profile__data">
-        <div className="data__item">
-          <span className="data__header">Name:</span>
-          {' '}
-          {user.username}
-        </div>
-        <div className="data__item">
-          <span className="data__header">Level:</span>
-          {' '}
-          {user.level}
-        </div>
-        <div className="data__item">
-          <span className="data__header">Experience:</span>
-          {' '}
-          {user.exp}
-        </div>
+        {userProperties.map((item) => (
+          <DataItem
+            key={item.name}
+            value={user[item.name]}
+            property={item.property}
+          />
+        ))}
         {stats.map(([stat, value]) => (
-          <div key={stat} className="data__item">
-            <span className="data__header">{stat}</span>
-            :
-            {' '}
-            {value}
-          </div>
+          <DataItem key={stat} value={value} property={stat} />
         ))}
       </div>
     </div>
