@@ -24,9 +24,14 @@ const userSlice = createSlice({
     setExp: (state, { payload }) => {
       state.exp = payload;
     },
+    setStat: (state, { payload }) => {
+      state.stats[payload] += 1;
+    },
   },
 });
 
-export const { fetchUserData, setLevel, setExp } = userSlice.actions;
+export const {
+  fetchUserData, setLevel, setExp, setStat,
+} = userSlice.actions;
 
 export default userSlice.reducer;

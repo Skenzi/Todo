@@ -23,6 +23,14 @@ function ModalForm({
         <input id="quest-reward" className="form-control" required type="text" value={taskData.reward} onChange={(e) => setTaskData({ ...taskData, reward: e.currentTarget.value })} />
       </div>
       <div className="form-group">
+        <label htmlFor="quest-reward" className="form-label">Какая характеристика повышается?</label>
+        <select name="stats" defaultValue="str" className="form-control" onChange={(e) => setTaskData({ ...taskData, stat: e.currentTarget.value })}>
+          <option value="str">str</option>
+          <option value="agi">agi</option>
+          <option value="int">int</option>
+        </select>
+      </div>
+      <div className="form-group">
         <label htmlFor="quest-date" className="form-label">Срок</label>
         <input id="quest-date" className="form-control" required value={taskData.dateEnd} type="date" onChange={(e) => setTaskData({ ...taskData, dateEnd: e.currentTarget.value })} />
       </div>
@@ -38,12 +46,12 @@ function ModalTaskForm() {
   const { elements } = useContext(apiContext);
   const modalState = useSelector(modalSelector);
   const [taskData, setTaskData] = useState({
-    name: '', text: '', dateEnd: '', reward: 0,
+    name: '', text: '', dateEnd: '', reward: 0, stat: '',
   });
   const dispatch = useDispatch();
   const closeModal = () => {
     setTaskData({
-      name: '', text: '', dateEnd: '', reward: 0,
+      name: '', text: '', dateEnd: '', reward: 0, stat: '',
     });
     dispatch(setStateModal(false));
     elements.body.classList.remove('modal-open');

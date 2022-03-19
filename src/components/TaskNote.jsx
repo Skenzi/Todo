@@ -5,7 +5,7 @@ import paper from '../images/paper.png';
 import seal from '../images/seal.png';
 import handWithPen from '../images/handWithPen.png';
 import { setTaskStatus, deleteTask, setTaskText } from '../store/slices/tasksSlice.js';
-import { setLevel, setExp } from '../store/slices/userSlice.js';
+import { setLevel, setExp, setStat } from '../store/slices/userSlice.js';
 
 function TaskForm({ task, setStateTaskForm }) {
   const dispatch = useDispatch();
@@ -60,6 +60,7 @@ function TaskNote() {
     } else {
       dispatch(setExp(newExpUser));
     }
+    dispatch(setStat(task.stat));
     dispatch(setTaskStatus({ id: task.id, status: 'succefull' }));
   };
   const removeTask = (id) => () => {
