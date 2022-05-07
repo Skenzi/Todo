@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+/*import React, { ButtonHTMLAttributes, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import apiContext from '../context';
@@ -7,9 +7,12 @@ import { userSelector } from '../store/selectors';
 function ProfileMenu() {
   const { user, logOut } = useContext(apiContext);
   const userData = useSelector(userSelector);
+  const handler = (ev: React.MouseEvent<HTMLButtonElement>) => {
+    (ev.target as HTMLElement).nextElementSibling.classList.toggle('show')
+  };
   return (
     <>
-      <button type="button" className="button button-bar button-dropdown" onClick={(ev) => ev.target.nextElementSibling.classList.toggle('show')}>{user.username}</button>
+      <button type="button" className="button button-bar button-dropdown" onClick={handler}>{user.username}</button>
       <nav className="dropdown-menu bg-main-dark">
         <li>
           <div className="dropdown-menu-item">
@@ -31,4 +34,4 @@ function ProfileMenu() {
   );
 }
 
-export default ProfileMenu;
+export default ProfileMenu;*/

@@ -6,7 +6,10 @@
         display: flex;
         position: relative;
         &:nth-child(1n + 2) {
-            margin-left: 100px;
+            margin-left: 20px;
+        }
+        &:last-child {
+            margin-left: auto;
         }
     }
 }

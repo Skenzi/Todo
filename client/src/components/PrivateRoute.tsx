@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import LoginPage from './pages/LoginPage.jsx';
+/*import React, { useContext } from 'react';
+import LoginPage from './pages/LoginPage';
 import apiContext from '../context/index';
 
 function PrivateRoute({ children }) {
@@ -7,4 +7,4 @@ function PrivateRoute({ children }) {
   return user.username && user.password ? children : <LoginPage />;
 }
 
-export default PrivateRoute;
+export default PrivateRoute;*/

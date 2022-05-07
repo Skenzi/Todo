@@ -14,11 +14,18 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
   },
+  resolve: {
+    extensions: ['.ts', '.js', '.tsx', '.jsx'],
+  },
   module: {
     rules: [
       {
         test: /\.js?x$/,
         use: 'babel-loader',
+      },
+      {
+        test: /\.ts?x$/,
+        use: 'ts-loader',
       },
       {
         test: /\.s?css$/,

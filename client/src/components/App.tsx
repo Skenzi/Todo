@@ -1,31 +1,32 @@
 import React, { useState, useMemo } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './Header.jsx';
-import TasksPage from './pages/TasksPage.jsx';
-import NotFoundPage from './pages/NotFoundPage.jsx';
-import ModalTaskForm from './ModalTaskForm.jsx';
+import Header from './Header';
+//import TasksPage from './pages/TasksPage';
+//import NotFoundPage from './pages/NotFoundPage';
+//import ModalTaskForm from './ModalTaskForm';
 import apiContext from '../context/index';
-import LoginPage from './pages/LoginPage.jsx';
-import SignUpPage from './pages/SignUpPage.jsx';
-import ProfilePage from './pages/ProfilePage.jsx';
+//import LoginPage from './pages/LoginPage';
+//import SignUpPage from './pages/SignUpPage';
+//import ProfilePage from './pages/ProfilePage';
 
-function Main() {
+/*function Main() {
   return (
     <main className="flex-container main table-background flex-column">
       <Routes>
-        <Route exact path="/" element={<TasksPage />} />
-        <Route exact path="/loginPage" element={<LoginPage />} />
-        <Route exact path="/signUpPage" element={<SignUpPage />} />
-        <Route exact path="/profilePage" element={<ProfilePage />} />
-        <Route exact path="*" element={<NotFoundPage />} />
+        <Route path="/" element={<TasksPage />} />
+        <Route path="/loginPage" element={<LoginPage />} />
+        <Route path="/signUpPage" element={<SignUpPage />} />
+        <Route path="/profilePage" element={<ProfilePage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </main>
   );
-}
+}*/
 
 function App() {
   const emptyUser = {
     username: null,
+    token: null,
   };
   const [user, setUser] = useState(emptyUser);
   const logOut = () => {
@@ -46,9 +47,8 @@ function App() {
     <apiContext.Provider value={memoizedValue}>
       <Router>
         <Header />
-        <Main />
+        
       </Router>
-      <ModalTaskForm />
     </apiContext.Provider>
   );
 }

@@ -1,19 +1,24 @@
-import React from 'react';
+/*import React from 'react';
 import { Link } from 'react-router-dom';
-import GroupControls from './GroupControl.jsx';
+import FormGroup from './FormGroup';
+
+interface LoginFormItem {
+  name: string,
+  labelText: string,
+  type: string,
+}
 
 function LoginForm({
-  onChangeDataForm, error, dataControls, onSubmit, infoForm,
+  onChangeDataForm, error, onSubmit, infoForm,
 }) {
   return (
     <form className="form bg-main" onSubmit={onSubmit}>
       <div className="form-title">{infoForm.title}</div>
       <div className="form-body">
-        {infoForm.groupControls.map((item) => (
-          <GroupControls
+        {infoForm.formGroups.map((item: LoginFormItem) => (
+          <FormGroup
             key={item.name}
             infoControl={item}
-            dataLogin={dataControls}
             onChangeDataForm={onChangeDataForm}
           />
         ))}
@@ -27,4 +32,4 @@ function LoginForm({
   );
 }
 
-export default LoginForm;
+export default LoginForm;*/

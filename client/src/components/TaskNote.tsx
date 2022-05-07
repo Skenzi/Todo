@@ -1,38 +1,51 @@
-import React, { useState } from 'react';
+// TODO: add reward
+
+/*import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { currentTask, userSelector } from '../store/selectors/index';
-import paper from '../images/paper.png';
-import seal from '../images/seal.png';
-import handWithPen from '../images/handWithPen.png';
 import { deleteTask, setTaskProperty } from '../store/slices/tasksSlice.js';
 import { setLevel, setExp, setStat } from '../store/slices/userSlice.js';
+import { Task } from '../types/types';
 
-function TaskForm({ task, setStateTaskForm }) {
+const paper = require("../images/paper.png") as string;
+const seal = require("../images/seal.png") as string;
+const handWithPen = require("../images/handWithPen.png") as string;
+
+interface TaskFormProps {
+  task: Task,
+  setStateTaskForm: React.Dispatch<React.SetStateAction<boolean>>,
+}
+
+function TaskForm({ task, setStateTaskForm }: TaskFormProps) {
   const dispatch = useDispatch();
   const [newText, setText] = useState(task.text);
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(setTaskProperty({ id: task.id, property: 'text', value: newText }));
     setStateTaskForm(false);
   };
   return (
     <form onSubmit={onSubmit}>
-      <textarea className="form-control" rows="15" style={{ resize: 'none' }} value={newText} onChange={(e) => setText(e.target.value)} />
+      <textarea className="form-control" rows={15} style={{ resize: 'none' }} value={newText} onChange={(e) => setText(e.target.value)} />
       <button type="submit" className="button button-submit">Изменить</button>
       <button type="button" className="button" onClick={() => setStateTaskForm(false)}>Отменить</button>
     </form>
   );
 }
 
-function TaskBody({ task, setStateTaskForm, compliteTask }) {
+interface TaskBodyProps {
+  task: Task,
+  setStateTaskForm: React.Dispatch<React.SetStateAction<boolean>>,
+  compliteTask: () => void,
+}
+
+function TaskBody({ task, setStateTaskForm, compliteTask }: TaskBodyProps) {
   return (
     <>
       <div className="task-text">{task.text}</div>
       <div className="task-reward" data-exp="100">
         <h2 className="task-reward-title">Награда</h2>
         <div className="task-reward-text">
-          {task.reward}
-          {' '}
           опыта
         </div>
       </div>
@@ -52,10 +65,13 @@ function TaskNote() {
   const task = useSelector(currentTask);
   const [stateTaskForm, setStateTaskForm] = useState(false);
   const dispatch = useDispatch();
+
+
   const compliteTask = () => {
     let newExpUser = task.reward + user.exp;
     let expNextLvl = user.expNextLvl;
     let level = user.level;
+  
     if (newExpUser >= user.expNextLvl) {
       while (expNextLvl <= newExpUser) {
         newExpUser -= expNextLvl;
@@ -67,12 +83,16 @@ function TaskNote() {
     } else {
       dispatch(setExp(newExpUser));
     }
+  
     dispatch(setStat(task.stat));
     dispatch(setTaskProperty({ id: task.id, property: 'status', value: 'succefull' }));
   };
-  const removeTask = (id) => () => {
+
+
+  const removeTask = (id: number) => () => {
     dispatch(deleteTask(id));
   };
+
   return (
     <section className="task-note">
       <img src={paper} alt="scroll" className="task-img" />
@@ -95,4 +115,4 @@ function TaskNote() {
   );
 }
 
-export default TaskNote;
+export default TaskNote;*/

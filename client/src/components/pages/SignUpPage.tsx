@@ -1,12 +1,12 @@
-import React, { useState, useContext } from 'react';
+/*import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import apiContext from '../../context';
-import users from '../../store/users';
-import FormLogin from '../FormLogin.jsx';
+import FormLogin from '../FormLogin';
 import { fetchUserData } from '../../store/slices/userSlice';
+import { User } from '../../types/types';
 
-const groupControls = [
+const formGroups = [
   {
     name: 'username',
     labelText: 'Имя пользователя',
@@ -28,7 +28,7 @@ const infoForm = {
   title: 'Регистрация',
   btnSubmitText: 'Зарегистрироваться',
   btnLinkText: 'Уже зарегистрированы?',
-  groupControls,
+  formGroups,
 };
 
 function SignUpPage() {
@@ -37,32 +37,11 @@ function SignUpPage() {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [dataSignUp, setDataSignUp] = useState({ username: '', password: '', confirmPassword: '' });
-  const onSubmit = (ev) => {
+  const onSubmit = (ev: React.FormEvent) => {
     ev.preventDefault();
-    if (dataSignUp.password !== dataSignUp.confirmPassword) {
-      setError('Пароли не совпадают');
-      return;
-    }
-    const isExistUser = users.find((user) => user.username === dataSignUp.username);
-    if (isExistUser) {
-      setError('Такой уже есть');
-    } else {
-      const newUser = {
-        username: dataSignUp.username,
-        password: dataSignUp.password,
-        level: 1,
-        exp: 0,
-        expNextLvl: 100,
-        status: { int: 10, str: 10, agi: 10 },
-        tasks: [],
-      };
-      users.push(newUser);
-      api.setUser({ username: newUser.username });
-      dispatch(fetchUserData(newUser));
-      navigate('/', { replace: true });
-    }
+    navigate('/', { replace: true });
   };
-  const onChangeDataSignUp = (dataKey) => (ev) => {
+  const onChangeDataSignUp = (dataKey: string) => (ev: React.ChangeEvent<HTMLInputElement>) => {
     setDataSignUp({ ...dataSignUp, [dataKey]: ev.target.value });
   };
   return (
@@ -70,7 +49,6 @@ function SignUpPage() {
       <FormLogin
         onChangeDataForm={onChangeDataSignUp}
         error={error}
-        dataControls={dataSignUp}
         onSubmit={onSubmit}
         infoForm={infoForm}
       />
@@ -78,4 +56,4 @@ function SignUpPage() {
   );
 }
 
-export default SignUpPage;
+export default SignUpPage;*/

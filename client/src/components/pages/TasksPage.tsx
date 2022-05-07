@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+/*import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import ListTasks from '../ListTasks.jsx';
-import TaskNote from '../TaskNote.jsx';
+import ListTasks from '../ListTasks';
+import TaskNote from '../TaskNote';
 import { currentTask } from '../../store/selectors/index.js';
 
-function TasksButtons({ setTypeTasks }) {
+interface TasksButtonsProps {
+  setTypeTasks: React.Dispatch<React.SetStateAction<string>>,
+}
+
+function TasksButtons({ setTypeTasks }: TasksButtonsProps) {
   return (
     <div className="f-row buttons-group">
       <button type="button" onClick={() => setTypeTasks('active')} className="button button-bar button-lg">Active</button>
@@ -28,4 +32,4 @@ function TasksPage() {
   );
 }
 
-export default TasksPage;
+export default TasksPage;*/

@@ -1,13 +1,32 @@
-import React, { useContext, useState } from 'react';
+/*import React, { useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import apiContext from '../context/index';
 import { modalSelector } from '../store/selectors/index';
 import { setStateModal } from '../store/slices/modalSlice';
 import { addTask } from '../store/slices/tasksSlice';
 
+interface ModalFormProps {
+  onSubmit: (e: React.FormEvent) => void,
+  setTaskData: React.Dispatch<React.SetStateAction<{
+    name: string;
+    text: string;
+    dateEnd: string;
+    reward: number;
+    stat: string;
+  }>>,
+  taskData: {
+    name: string;
+    text: string;
+    dateEnd: string;
+    reward: number;
+    stat: string;
+  },
+  closeModal: () => void,
+}
+
 function ModalForm({
   onSubmit, setTaskData, taskData, closeModal,
-}) {
+}: ModalFormProps) {
   return (
     <form className="form" onSubmit={onSubmit}>
       <div className="form-group">
@@ -16,11 +35,11 @@ function ModalForm({
       </div>
       <div className="form-group">
         <label htmlFor="quest-text" className="form-label">Text</label>
-        <textarea id="quest-text" className="form-control" rows="5" required value={taskData.text} onChange={(e) => setTaskData({ ...taskData, text: e.currentTarget.value })} />
+        <textarea id="quest-text" className="form-control" rows={5} required value={taskData.text} onChange={(e) => setTaskData({ ...taskData, text: e.currentTarget.value })} />
       </div>
       <div className="form-group">
         <label htmlFor="quest-reward" className="form-label">Reward</label>
-        <input id="quest-reward" className="form-control" required type="text" value={taskData.reward} onChange={(e) => setTaskData({ ...taskData, reward: e.currentTarget.value })} />
+        <input id="quest-reward" className="form-control" required type="text" value={taskData.reward} onChange={(e) => setTaskData({ ...taskData, reward: +e.currentTarget.value })} />
       </div>
       <div className="form-group">
         <label htmlFor="quest-reward" className="form-label">Какая характеристика повышается?</label>
@@ -49,6 +68,7 @@ function ModalTaskForm() {
     name: '', text: '', dateEnd: '', reward: 0, stat: '',
   });
   const dispatch = useDispatch();
+
   const closeModal = () => {
     setTaskData({
       name: '', text: '', dateEnd: '', reward: 0, stat: '',
@@ -56,7 +76,8 @@ function ModalTaskForm() {
     dispatch(setStateModal(false));
     elements.body.classList.remove('modal-open');
   };
-  const onSubmit = (e) => {
+
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(addTask(taskData));
     closeModal();
@@ -78,3 +99,4 @@ function ModalTaskForm() {
 }
 
 export default ModalTaskForm;
+*/

@@ -1,12 +1,12 @@
-import React, { useState, useContext } from 'react';
+/*import React, { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import apiContext from '../../context';
 import users from '../../store/users';
 import { fetchUserData } from '../../store/slices/userSlice';
-import FormLogin from '../FormLogin.jsx';
+import FormLogin from '../FormLogin';
 
-const groupControls = [
+const formGroups = [
   {
     name: 'username',
     labelText: 'Имя пользователя',
@@ -23,7 +23,7 @@ const infoForm = {
   title: 'Вход в систему',
   btnSubmitText: 'Войти',
   btnLinkText: 'Не зарегистрированы?',
-  groupControls,
+  formGroups,
 };
 
 function LoginPage() {
@@ -32,11 +32,14 @@ function LoginPage() {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [dataLogin, setDataLogin] = useState({ username: '', password: '' });
-  const onSubmit = (ev) => {
+
+  const onSubmit = (ev: React.FormEvent) => {
     ev.preventDefault();
+  
     const currUser = users.find(
       (user) => user.username === dataLogin.username && user.password === dataLogin.password,
     );
+  
     if (currUser) {
       api.setUser({ username: currUser.username });
       dispatch(fetchUserData(currUser));
@@ -44,16 +47,18 @@ function LoginPage() {
     } else {
       setError('Такого пользователя нет');
     }
+
   };
-  const onChangeDataLogin = (dataKey) => (ev) => {
+
+  const onChangeDataForm = (dataKey: string) => (ev: React.ChangeEvent<HTMLInputElement>) => {
     setDataLogin({ ...dataLogin, [dataKey]: ev.target.value });
   };
+
   return (
     <div className="container-sm">
       <FormLogin
-        onChangeDataForm={onChangeDataLogin}
+        onChangeDataForm={onChangeDataForm}
         error={error}
-        dataLogin={dataLogin}
         onSubmit={onSubmit}
         infoForm={infoForm}
       />
@@ -61,4 +66,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default LoginPage;*/

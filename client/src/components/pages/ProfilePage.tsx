@@ -1,8 +1,15 @@
-import React from 'react';
+// TODO: add stats
+
+/*import React from 'react';
 import { useSelector } from 'react-redux';
 import { userSelector } from '../../store/selectors';
 
-function DataItem({ value, property }) {
+interface DataItemProps {
+  value: string | number,
+  property: string,
+}
+
+function DataItem({ value, property }: DataItemProps) {
   return (
     <div className="data__item">
       <span className="data__header">{property}</span>
@@ -29,7 +36,6 @@ const userProperties = [
 
 function ProfilePage() {
   const user = useSelector(userSelector);
-  const stats = Object.entries(user.stats);
   return (
     <div className="profile bg-main">
       <div className="profile__img" />
@@ -41,12 +47,9 @@ function ProfilePage() {
             property={item.property}
           />
         ))}
-        {stats.map(([stat, value]) => (
-          <DataItem key={stat} value={value} property={stat} />
-        ))}
       </div>
     </div>
   );
 }
 
-export default ProfilePage;
+export default ProfilePage;*/

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+/*import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { tasksActiveSelector, tasksSuccefullSelector, tasksFailedSelector } from '../store/selectors';
 import { checkTasks, setCurrentTaskId } from '../store/slices/tasksSlice';
@@ -26,20 +26,9 @@ function ListTasks({ currentTasksStatus }) {
     <div className="tasks bg-main">
       {currentTasksStatus === 'active' ? <button type="button" className="button" onClick={setModal}>Add quest</button> : null}
       <ol className="tasks-list">
-        {tasks.map((task) => (
-          <li key={task.id}>
-            <button type="button" className="button" onClick={() => dispatch(setCurrentTaskId(task.id))}>
-              <h2 className="task-name">{task.name}</h2>
-              <div>
-                До:
-                {task.dateEnd}
-              </div>
-            </button>
-          </li>
-        ))}
       </ol>
     </div>
   );
 }
 
-export default ListTasks;
+export default ListTasks;*/

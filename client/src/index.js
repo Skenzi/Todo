@@ -1,6 +1,6 @@
 import { render } from 'react-dom';
 import './styles/app.scss';
-import init from './init.jsx';
+import init from './init';
 
 const runApp = () => {
   const app = document.getElementById('app');
