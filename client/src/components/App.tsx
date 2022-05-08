@@ -1,13 +1,13 @@
 import React, { useState, useMemo } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './Header';
-//import TasksPage from './pages/TasksPage';
-//import NotFoundPage from './pages/NotFoundPage';
-//import ModalTaskForm from './ModalTaskForm';
+//import TasksPage from '../pages/TasksPage';
+//import NotFoundPage from '../pages/NotFoundPage';
+//import ModalTaskForm from '../ModalTaskForm';
 import apiContext from '../context/index';
-//import LoginPage from './pages/LoginPage';
-//import SignUpPage from './pages/SignUpPage';
-//import ProfilePage from './pages/ProfilePage';
+//import LoginPage from '../pages/LoginPage';
+//import SignUpPage from '../pages/SignUpPage';
+//import ProfilePage from '../pages/ProfilePage';
 
 /*function Main() {
   return (
@@ -22,6 +22,11 @@ import apiContext from '../context/index';
     </main>
   );
 }*/
+
+const getToken = () => {
+  const token = localStorage.getItem('userToken');
+  return token;
+}
 
 function App() {
   const emptyUser = {
