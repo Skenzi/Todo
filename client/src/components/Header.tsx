@@ -1,11 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import apiContext from '../context/index';
 import logo from "../images/TodoQuestsLogo.svg";
 //import ProfileMenu from './ProfileMenu';
 
 function Header() {
-  const { user } = useContext(apiContext);
   return (
     <header className="header bg-main">
       <div className="header-item"><img src={logo} alt="logo" className="logo" /></div>

@@ -2,9 +2,9 @@ import { render } from 'react-dom';
 import './styles/app.scss';
 import init from './init';
 
-const runApp = () => {
+const runApp = async () => {
   const app = document.getElementById('app');
-  render(init(), app);
+  render(await init(), app);
 };
 
 runApp();

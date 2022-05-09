@@ -8,6 +8,7 @@ import apiContext from '../context/index';
 //import LoginPage from '../pages/LoginPage';
 //import SignUpPage from '../pages/SignUpPage';
 //import ProfilePage from '../pages/ProfilePage';
+import { useEffect } from 'react';
 
 /*function Main() {
   return (
@@ -23,39 +24,61 @@ import apiContext from '../context/index';
   );
 }*/
 
-const getToken = () => {
-  const token = localStorage.getItem('userToken');
-  return token;
-}
-
-function App() {
+const getUser = () => {
   const emptyUser = {
     username: null,
     token: null,
   };
-  const [user, setUser] = useState(emptyUser);
-  const logOut = () => {
-    setUser(emptyUser);
-  };
+  const token = localStorage.getItem('userToken');
+  return token;
+}
+
+class SocketApi {
+  socket
+  constructor(socket: WebSocket) {
+    this.socket = socket;
+  }
+  getUser() {
+    this.socket.send(JSON.stringify({
+      event: 'getUser',
+      username: 'Dimas',
+      password: '123456',
+    }));
+  }
+}
+
+function App() {
+  const [socketApi, setSocketApi] = useState<SocketApi>();
+  useEffect(() => {
+    const socket = new WebSocket('ws://localhost:5000/');
+    socket.onopen = () => {
+      console.log('connected!')
+      socket.send(JSON.stringify({
+        event: 'connection',
+      }))
+      setSocketApi(new SocketApi(socket));
+    }
+    socket.onmessage = function(this: WebSocket, ev: MessageEvent<any>) {
+      const data = JSON.parse(ev.data);
+      switch(data.event) {
+        case 'getUser':
+          console.log(data, 22);
+      }
+    }
+  }, [])
+
   const elements = {
     body: document.querySelector('body'),
   };
-  const memoizedValue = useMemo(
-    () => ({
-      elements, user, setUser, logOut,
-    }),
-    [{
-      elements, user, setUser, logOut,
-    }],
-  );
-  return (
-    <apiContext.Provider value={memoizedValue}>
+  console.log(socketApi?.getUser())
+  return !socketApi ? <div>Loading...</div> : (
+    <apiContext.Provider value={{ socketApi }}>
       <Router>
         <Header />
-        
+      
       </Router>
     </apiContext.Provider>
-  );
+);
 }
 
 export default App;
