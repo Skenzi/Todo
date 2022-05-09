@@ -1,10 +1,10 @@
-/*import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import apiContext from '../../context';
-import FormLogin from '../FormLogin';
-import { fetchUserData } from '../../store/slices/userSlice';
-import { User } from '../../types/types';
+import apiContext from '../context';
+import FormLogin from '../components/FormLogin';
+import { fetchUserData } from '../store/slices/userSlice';
+import { User } from '../types/types';
 
 const formGroups = [
   {
@@ -35,7 +35,7 @@ function SignUpPage() {
   const api = useContext(apiContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
   const [dataSignUp, setDataSignUp] = useState({ username: '', password: '', confirmPassword: '' });
   const onSubmit = (ev: React.FormEvent) => {
     ev.preventDefault();
@@ -56,4 +56,4 @@ function SignUpPage() {
   );
 }
 
-export default SignUpPage;*/
+export default SignUpPage;

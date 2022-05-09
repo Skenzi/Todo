@@ -1,4 +1,4 @@
-/*import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import FormGroup from './FormGroup';
 
@@ -8,9 +8,25 @@ interface LoginFormItem {
   type: string,
 }
 
+interface LoginFormProps {
+  onChangeDataForm: (dataKey: string) => (ev: React.ChangeEvent<HTMLInputElement>) => void,
+  error: string,
+  onSubmit: (ev: React.FormEvent) => void,
+  infoForm: {
+    title: string;
+    btnSubmitText: string;
+    btnLinkText: string;
+    formGroups: {
+        name: string;
+        labelText: string;
+        type: string;
+    }[],
+  }
+}
+
 function LoginForm({
   onChangeDataForm, error, onSubmit, infoForm,
-}) {
+}: LoginFormProps) {
   return (
     <form className="form bg-main" onSubmit={onSubmit}>
       <div className="form-title">{infoForm.title}</div>
@@ -32,4 +48,4 @@ function LoginForm({
   );
 }
 
-export default LoginForm;*/
+export default LoginForm;

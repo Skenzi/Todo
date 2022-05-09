@@ -1,10 +1,10 @@
-/*import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import apiContext from '../../context';
-import users from '../../store/users';
-import { fetchUserData } from '../../store/slices/userSlice';
-import FormLogin from '../FormLogin';
+import apiContext from '../context';
+import users from '../store/users';
+import { fetchUserData } from '../store/slices/userSlice';
+import FormLogin from '../components/FormLogin';
 
 const formGroups = [
   {
@@ -30,23 +30,11 @@ function LoginPage() {
   const api = useContext(apiContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
   const [dataLogin, setDataLogin] = useState({ username: '', password: '' });
 
   const onSubmit = (ev: React.FormEvent) => {
     ev.preventDefault();
-  
-    const currUser = users.find(
-      (user) => user.username === dataLogin.username && user.password === dataLogin.password,
-    );
-  
-    if (currUser) {
-      api.setUser({ username: currUser.username });
-      dispatch(fetchUserData(currUser));
-      navigate('/', { replace: true });
-    } else {
-      setError('Такого пользователя нет');
-    }
 
   };
 
@@ -66,4 +54,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;*/
+export default LoginPage;

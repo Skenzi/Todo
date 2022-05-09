@@ -1,8 +1,8 @@
-/*import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import ListTasks from '../ListTasks';
-import TaskNote from '../TaskNote';
-import { currentTask } from '../../store/selectors/index.js';
+import ListTasks from '../components/ListTasks';
+import TaskNote from '../components/TaskNote';
+import { currentTask } from '../store/selectors/index.js';
 
 interface TasksButtonsProps {
   setTypeTasks: React.Dispatch<React.SetStateAction<string>>,
@@ -32,4 +32,4 @@ function TasksPage() {
   );
 }
 
-export default TasksPage;*/
+export default TasksPage;

@@ -1,20 +1,20 @@
 import React, { useState, useMemo } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './Header';
-//import TasksPage from '../pages/TasksPage';
-//import NotFoundPage from '../pages/NotFoundPage';
-//import ModalTaskForm from '../ModalTaskForm';
+import TasksPage from '../pages/TasksPage';
+import NotFoundPage from '../pages/NotFoundPage';
+import ModalTaskForm from './ModalTaskForm';
 import apiContext from '../context/index';
-//import LoginPage from '../pages/LoginPage';
-//import SignUpPage from '../pages/SignUpPage';
-//import ProfilePage from '../pages/ProfilePage';
+import LoginPage from '../pages/LoginPage';
+import SignUpPage from '../pages/SignUpPage';
+import ProfilePage from '../pages/ProfilePage';
 import { useEffect } from 'react';
 
-/*function Main() {
+function Main() {
   return (
     <main className="flex-container main table-background flex-column">
       <Routes>
-        <Route path="/" element={<TasksPage />} />
+      <Route path="/" element={<TasksPage />} />
         <Route path="/loginPage" element={<LoginPage />} />
         <Route path="/signUpPage" element={<SignUpPage />} />
         <Route path="/profilePage" element={<ProfilePage />} />
@@ -22,7 +22,7 @@ import { useEffect } from 'react';
       </Routes>
     </main>
   );
-}*/
+}
 
 const getUser = () => {
   const emptyUser = {
@@ -75,8 +75,9 @@ function App() {
     <apiContext.Provider value={{ socketApi }}>
       <Router>
         <Header />
-      
+        <Main />
       </Router>
+      <ModalTaskForm />
     </apiContext.Provider>
 );
 }

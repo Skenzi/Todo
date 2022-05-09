@@ -1,23 +1,19 @@
-/*import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { tasksActiveSelector, tasksSuccefullSelector, tasksFailedSelector } from '../store/selectors';
 import { checkTasks, setCurrentTaskId } from '../store/slices/tasksSlice';
 import { setStateModal } from '../store/slices/modalSlice';
 import apiContext from '../context/index';
 
-const tasksSelectors = {
+/*const tasksSelectors = {
   active: tasksActiveSelector,
   succefull: tasksSuccefullSelector,
   failed: tasksFailedSelector,
-};
+};*/
 
-function ListTasks({ currentTasksStatus }) {
+function ListTasks({ currentTasksStatus }: { currentTasksStatus: string }) {
   const dispatch = useDispatch();
   const { elements } = useContext(apiContext);
-  useEffect(() => {
-    dispatch(checkTasks());
-  }, []);
-  const tasks = useSelector(tasksSelectors[currentTasksStatus]);
   const setModal = () => {
     dispatch(setStateModal(true));
     elements.body.classList.add('modal-open');
@@ -31,4 +27,4 @@ function ListTasks({ currentTasksStatus }) {
   );
 }
 
-export default ListTasks;*/
+export default ListTasks;

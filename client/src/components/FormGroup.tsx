@@ -1,4 +1,4 @@
-/*import React from 'react';
+import React from 'react';
 
 interface LoginFormItem {
   name: string,
@@ -22,4 +22,4 @@ function FormGroup({
   );
 }
 
-export default FormGroup;*/
+export default FormGroup;

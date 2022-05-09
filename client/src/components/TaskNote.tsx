@@ -1,6 +1,6 @@
 // TODO: add reward
 
-/*import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { currentTask, userSelector } from '../store/selectors/index';
 import { deleteTask, setTaskProperty } from '../store/slices/tasksSlice.js';
@@ -115,4 +115,4 @@ function TaskNote() {
   );
 }
 
-export default TaskNote;*/
+export default TaskNote;

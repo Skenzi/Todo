@@ -1,4 +1,4 @@
-/*import React, { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import apiContext from '../context/index';
 import { modalSelector } from '../store/selectors/index';
@@ -99,4 +99,3 @@ function ModalTaskForm() {
 }
 
 export default ModalTaskForm;
-*/
