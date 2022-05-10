@@ -3,19 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 const userSlice = createSlice({
   name: 'userInfo',
   initialState: {
-    username: 'Человек',
-    level: 1,
-    exp: 0,
-    expNextLvl: 100,
-    stats: {},
+    user: {
+      username: '',
+      token: '',
+    },
   },
   reducers: {
-    fetchUserData: (state, { payload }) => {
-      state.username = payload.username;
-      state.exp = payload.exp;
-      state.level = payload.level;
-      state.expNextLvl = payload.expNextLvl;
-      state.stats = payload.stats;
+    setUser: (state, { payload }) => {
+      state.user = payload;
     },
     setLevel: (state, { payload }) => {
       state.level = payload.level;
@@ -31,7 +26,7 @@ const userSlice = createSlice({
 });
 
 export const {
-  fetchUserData, setLevel, setExp, setStat,
+  setUser, setLevel, setExp, setStat,
 } = userSlice.actions;
 
 export default userSlice.reducer;

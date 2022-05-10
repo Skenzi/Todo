@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import _ from 'lodash';
-import { fetchUserData } from './userSlice';
 
 const tasksSlice = createSlice({
   name: 'tasksInfo',
@@ -37,11 +36,6 @@ const tasksSlice = createSlice({
     setTaskProperty: (state, { payload }) => {
       const currentTask = state.tasks.find((task) => payload.id === task.id);
       currentTask[payload.property] = payload.value;
-    },
-  },
-  extraReducers: {
-    [fetchUserData]: (state, { payload }) => {
-      state.tasks = payload.tasks;
     },
   },
 });

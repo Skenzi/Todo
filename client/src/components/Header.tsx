@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from "../images/TodoQuestsLogo.svg";
-//import ProfileMenu from './ProfileMenu';
+import ProfileMenu from './ProfileMenu';
+import { useSelector } from 'react-redux';
+import { userSelector } from '../store/selectors';
 
 function Header() {
+  const {user} = useSelector(userSelector);
+  console.log(user, 1)
   return (
     <header className="header bg-main">
       <div className="header-item"><img src={logo} alt="logo" className="logo" /></div>
@@ -11,7 +15,7 @@ function Header() {
         <Link to="/" className="button button-bar">Квесты</Link>
       </nav>
       <div className="header-item">
-        <Link to="/loginPage" type="button" className="button button-bar">Войти/Зарегистрироваться</Link>
+        {!user?.token ? <Link to="/loginPage" type="button" className="button button-bar">Войти/Зарегистрироваться</Link> : <ProfileMenu />}
       </div>
     </header>
   );

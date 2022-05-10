@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import apiContext from '../context';
 import FormLogin from '../components/FormLogin';
-import { fetchUserData } from '../store/slices/userSlice';
+import { setUser } from '../store/slices/userSlice';
 import { User } from '../types/types';
 
 const formGroups = [

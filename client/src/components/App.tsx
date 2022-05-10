@@ -9,6 +9,8 @@ import LoginPage from '../pages/LoginPage';
 import SignUpPage from '../pages/SignUpPage';
 import ProfilePage from '../pages/ProfilePage';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../store/slices/userSlice';
 
 function Main() {
   return (
@@ -47,10 +49,8 @@ class SocketApi {
   }
 }
 
-function App() {
-  const [socketApi, setSocketApi] = useState<SocketApi>();
-  useEffect(() => {
-    const socket = new WebSocket('ws://localhost:5000/');
+const connection = (setSocketApi: React.Dispatch<React.SetStateAction<SocketApi | undefined>>) => {
+  const socket = new WebSocket('ws://localhost:5000/');
     socket.onopen = () => {
       console.log('connected!')
       socket.send(JSON.stringify({
@@ -60,19 +60,31 @@ function App() {
     }
     socket.onmessage = function(this: WebSocket, ev: MessageEvent<any>) {
       const data = JSON.parse(ev.data);
-      switch(data.event) {
-        case 'getUser':
-          console.log(data, 22);
-      }
+      console.log(data, 22);
     }
+}
+
+function App() {
+  const [socketApi, setSocketApi] = useState<SocketApi>();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    connection(setSocketApi);
   }, [])
+
+  const logOut = () => {
+    dispatch(setUser({
+      username: null,
+      token: null,
+    }))
+  }
 
   const elements = {
     body: document.querySelector('body'),
   };
-  console.log(socketApi?.getUser())
+
   return !socketApi ? <div>Loading...</div> : (
-    <apiContext.Provider value={{ socketApi }}>
+    <apiContext.Provider value={{ socketApi, logOut }}>
       <Router>
         <Header />
         <Main />

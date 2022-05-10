@@ -3,6 +3,10 @@ const app = express();
 const aWss = require('express-ws')(app);
 const fs = require('fs');
 const path = require('path');
+const cors = require('cors');
+
+app.use(cors())
+app.use(express.json())
 
 const PORT = process.env.PORT || 5000;
 
@@ -24,20 +28,32 @@ app.ws('/', (ws, request) => {
                     name: 'user'
                 }))
                 break;
-            case 'addUser':
+            case 'signUp':
                 console.log('User added')
                 break;
-            case 'getUser':
-                const currentUser = users.find(user => user.username === msg.username && user.password === msg.password);
-                console.log('User getted', currentUser)
-                ws.send(JSON.stringify({
-                    event: 'getUser',
-                    username: currentUser.username,
-                    token: currentUser.token,
-                }))
-                break;
+            case 'getData':
+
         }
     })
+})
+
+app.post('/signup', (user) => {
+    console.log(user)
+})
+
+app.post('/login', (request, response) => {
+    const username = request.body.username;
+    const password = request.body.password;
+    const currentUser = users.find(user => user.username === username && user.password === password);
+    console.log('User getted', currentUser, request.body)
+    response.send(JSON.stringify({
+        username: currentUser.username,
+        token: currentUser.token,
+    }))
+})
+
+app.get('/data', () => {
+
 })
 
 app.listen(PORT, () => console.log('server started!'))

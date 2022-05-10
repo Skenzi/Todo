@@ -5,8 +5,9 @@ import apiContext from '../context';
 import { userSelector } from '../store/selectors';
 
 function ProfileMenu() {
-  const { user, logOut } = useContext(apiContext);
-  const userData = useSelector(userSelector);
+  const { user } = useSelector(userSelector);
+  const api = useContext(apiContext);
+
   const handler = (ev: React.MouseEvent<HTMLButtonElement>) => {
     (ev.target as HTMLElement).nextElementSibling?.classList.toggle('show')
   };
@@ -16,9 +17,7 @@ function ProfileMenu() {
       <nav className="dropdown-menu bg-main-dark">
         <li>
           <div className="dropdown-menu-item">
-            <div>{userData.username}</div>
-            <div>{`Lvl: ${userData.level}`}</div>
-            <div>{`Exp: ${userData.exp}`}</div>
+            <div>{user.username}</div>
           </div>
         </li>
         <li><hr className="dropdown-divider" /></li>
@@ -27,7 +26,7 @@ function ProfileMenu() {
         </li>
         <li><hr className="dropdown-divider" /></li>
         <li>
-          <button type="button" className="button button-outline dropdown-menu-item" onClick={logOut}>Выйти</button>
+          <button type="button" className="button button-outline dropdown-menu-item" onClick={() => api.logOut()}>Выйти</button>
         </li>
       </nav>
     </>

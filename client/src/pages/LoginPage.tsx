@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import apiContext from '../context';
-import users from '../store/users';
-import { fetchUserData } from '../store/slices/userSlice';
+import { setUser } from '../store/slices/userSlice';
 import FormLogin from '../components/FormLogin';
 
 const formGroups = [
@@ -35,7 +35,14 @@ function LoginPage() {
 
   const onSubmit = (ev: React.FormEvent) => {
     ev.preventDefault();
-
+    axios.post('http://localhost:5000/login', dataLogin)
+     .then(({data})=> {
+        console.log(data)
+        dispatch(setUser(data))
+        navigate('/', { replace: true });
+     }).catch((err) => {
+       setError(err);
+     })
   };
 
   const onChangeDataForm = (dataKey: string) => (ev: React.ChangeEvent<HTMLInputElement>) => {
