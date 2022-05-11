@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './Header';
 import TasksPage from '../pages/TasksPage';
 import NotFoundPage from '../pages/NotFoundPage';
@@ -16,7 +16,7 @@ function Main() {
   return (
     <main className="flex-container main table-background flex-column">
       <Routes>
-      <Route path="/" element={<TasksPage />} />
+        <Route path="/" element={<TasksPage />} />
         <Route path="/loginPage" element={<LoginPage />} />
         <Route path="/signUpPage" element={<SignUpPage />} />
         <Route path="/profilePage" element={<ProfilePage />} />
@@ -27,25 +27,14 @@ function Main() {
 }
 
 const getUser = () => {
-  const emptyUser = {
-    username: null,
-    token: null,
-  };
-  const token = localStorage.getItem('userToken');
-  return token;
+  const user = sessionStorage.getItem('user');
+  return user && JSON.parse(user);
 }
 
 class SocketApi {
   socket
   constructor(socket: WebSocket) {
     this.socket = socket;
-  }
-  getUser() {
-    this.socket.send(JSON.stringify({
-      event: 'getUser',
-      username: 'Dimas',
-      password: '123456',
-    }));
   }
 }
 
@@ -70,6 +59,10 @@ function App() {
 
   useEffect(() => {
     connection(setSocketApi);
+    const user = getUser();
+    if(user) {
+      dispatch(setUser(user));
+    }
   }, [])
 
   const logOut = () => {
@@ -77,18 +70,28 @@ function App() {
       username: null,
       token: null,
     }))
+    sessionStorage.removeItem('user');
+  }
+
+  const getAutorizedHeader = () => {
+    const user = sessionStorage.getItem('user');
+    if(user) {
+      const {token} = JSON.parse(user);
+      return { Authorization: `Bearer ${token}` };
+    }
+    return {};
   }
 
   const elements = {
     body: document.querySelector('body'),
   };
 
-  return !socketApi ? <div>Loading...</div> : (
-    <apiContext.Provider value={{ socketApi, logOut }}>
-      <Router>
+  return !socketApi ? <div className='loading'>Loading...</div> : (
+    <apiContext.Provider value={{ socketApi, getUser, logOut, getAutorizedHeader }}>
+      <BrowserRouter>
         <Header />
         <Main />
-      </Router>
+      </BrowserRouter>
       <ModalTaskForm />
     </apiContext.Provider>
 );

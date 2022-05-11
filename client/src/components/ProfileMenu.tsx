@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import apiContext from '../context';
@@ -8,12 +8,12 @@ function ProfileMenu() {
   const { user } = useSelector(userSelector);
   const api = useContext(apiContext);
 
-  const handler = (ev: React.MouseEvent<HTMLButtonElement>) => {
+  const openMenuHandler = (ev: React.MouseEvent<HTMLButtonElement>) => {
     (ev.target as HTMLElement).nextElementSibling?.classList.toggle('show')
   };
   return (
     <>
-      <button type="button" className="button button-bar button-dropdown" onClick={handler}>{user.username}</button>
+      <button type="button" className="button button-bar button-dropdown" onClick={openMenuHandler}>{user.username}</button>
       <nav className="dropdown-menu bg-main-dark">
         <li>
           <div className="dropdown-menu-item">

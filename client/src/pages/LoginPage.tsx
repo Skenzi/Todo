@@ -37,14 +37,16 @@ function LoginPage() {
     ev.preventDefault();
     axios.post('http://localhost:5000/login', dataLogin)
      .then(({data})=> {
-        console.log(data)
         dispatch(setUser(data))
+        console.log(data)
+        sessionStorage.setItem('user', JSON.stringify(data));
         navigate('/', { replace: true });
      }).catch((err) => {
-       setError(err);
+       if(err.response.status === 401) {
+        setError('Неправильное имя пользователя или пароль');
+       }
      })
   };
-
   const onChangeDataForm = (dataKey: string) => (ev: React.ChangeEvent<HTMLInputElement>) => {
     setDataLogin({ ...dataLogin, [dataKey]: ev.target.value });
   };

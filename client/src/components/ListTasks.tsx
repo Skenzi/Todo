@@ -1,17 +1,15 @@
 import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { tasksActiveSelector, tasksSuccefullSelector, tasksFailedSelector } from '../store/selectors';
-import { checkTasks, setCurrentTaskId } from '../store/slices/tasksSlice';
+import { currentTasks, statusTasks } from '../store/selectors';
+import { setCurrentTaskId } from '../store/slices/tasksSlice';
 import { setStateModal } from '../store/slices/modalSlice';
 import apiContext from '../context/index';
+import { Task } from '../types/types';
 
-/*const tasksSelectors = {
-  active: tasksActiveSelector,
-  succefull: tasksSuccefullSelector,
-  failed: tasksFailedSelector,
-};*/
-
-function ListTasks({ currentTasksStatus }: { currentTasksStatus: string }) {
+function ListTasks() {
+  const tasks = useSelector(currentTasks);
+  const currentTasksStatus = useSelector(statusTasks);
+  console.log(currentTasksStatus, 'status')
   const dispatch = useDispatch();
   const { elements } = useContext(apiContext);
   const setModal = () => {
@@ -22,6 +20,16 @@ function ListTasks({ currentTasksStatus }: { currentTasksStatus: string }) {
     <div className="tasks bg-main">
       {currentTasksStatus === 'active' ? <button type="button" className="button" onClick={setModal}>Add quest</button> : null}
       <ol className="tasks-list">
+        {tasks.map((task: Task) => {
+          return (
+            <li key={task.id}>
+              <button onClick={() => setCurrentTaskId(task.id)}>
+                <h3>{task.title}</h3>
+                <p>{task.text}</p>
+              </button>
+            </li>
+          )
+        })}
       </ol>
     </div>
   );

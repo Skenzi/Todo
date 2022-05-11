@@ -9,9 +9,9 @@ export interface FormLoginProps {
 export interface Task {
     name: string,
     text: string,
-    dateEnd: string,
+    title: string,
     status: string,
-    id: number,
+    id: string,
 }
 
 export interface User {

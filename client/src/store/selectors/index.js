@@ -5,20 +5,18 @@ export const currentTaskIdSelector = (state) => state.tasksInfo.currentTaskId;
 export const modalSelector = (state) => state.modalInfo;
 export const userSelector = (state) => state.userInfo;
 
-export const tasksActiveSelector = createSelector(
+export const statusTasks = (state) => state.tasksInfo.statusTasks;
+
+export const currentTasks = createSelector(
   tasksSelector,
-  (tasks) => tasks.filter((task) => task.status === 'active'),
-);
-export const tasksSuccefullSelector = createSelector(
-  tasksSelector,
-  (tasks) => tasks.filter((task) => task.status === 'succefull'),
-);
-export const tasksFailedSelector = createSelector(
-  tasksSelector,
-  (tasks) => tasks.filter((task) => task.status === 'failed'),
+  statusTasks,
+  (tasks, status) => {
+    console.log(status);
+    return tasks.filter((task) => task.status === status);
+  },
 );
 export const currentTask = createSelector(
-  tasksSelector,
+  currentTasks,
   currentTaskIdSelector,
   (tasks, currentTaskId) => tasks.find((task) => task.id === currentTaskId),
 );

@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 import { userSelector } from '../store/selectors';
 
 function Header() {
-  const {user} = useSelector(userSelector);
-  console.log(user, 1)
+  const { user } = useSelector(userSelector);
+
   return (
     <header className="header bg-main">
       <div className="header-item"><img src={logo} alt="logo" className="logo" /></div>

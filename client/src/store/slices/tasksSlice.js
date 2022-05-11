@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import _ from 'lodash';
 
 const tasksSlice = createSlice({
   name: 'tasksInfo',
@@ -7,6 +6,7 @@ const tasksSlice = createSlice({
     tasks: [],
     currentTaskId: 0,
     currentTask: null,
+    statusTasks: 'active',
   },
   reducers: {
     addTask: (state, { payload }) => {
@@ -14,17 +14,15 @@ const tasksSlice = createSlice({
       const day = date.getTime();
       const dateStart = `${date.getFullYear()}-${date.getMonth()}-${day < 10 ? `0${day}` : day}`;
       const newTask = {
-        ...payload, reward: +payload.reward, status: 'active', id: _.uniqueId(), dateStart,
+        ...payload, reward: +payload.reward, status: 'active', id: Date.now(), dateStart,
       };
       state.tasks.push(newTask);
     },
-    checkTasks: (state) => {
-      const filtredTasks = state.tasks.filter((task) => task.status !== 'succefull');
-      state.tasks = filtredTasks.map((task) => {
-        const dateNow = new Date();
-        const taskDateEnd = new Date(task.dateEnd);
-        return dateNow > taskDateEnd ? { ...task, status: 'failed' } : task;
-      });
+    setTasks: (state, { payload }) => {
+      state.tasks.push(...payload);
+    },
+    setStatusTasks: (state, { payload }) => {
+      state.statusTasks = payload;
     },
     deleteTask: (state, { payload }) => {
       const filtredTasks = state.tasks.filter(({ id }) => id !== payload);
@@ -41,7 +39,7 @@ const tasksSlice = createSlice({
 });
 
 export const {
-  addTask, deleteTask, setCurrentTaskId, checkTasks, setTaskProperty,
+  addTask, deleteTask, setCurrentTaskId, setTaskProperty, setTasks, setStatusTasks,
 } = tasksSlice.actions;
 
 export default tasksSlice.reducer;
