@@ -19,11 +19,11 @@ function ListTasks() {
   return (
     <div className="tasks bg-main">
       {currentTasksStatus === 'active' ? <button type="button" className="button" onClick={setModal}>Add quest</button> : null}
-      <ol className="tasks-list">
+      <ol className="tasks__list">
         {tasks.map((task: Task) => {
           return (
             <li key={task.id}>
-              <button onClick={() => setCurrentTaskId(task.id)}>
+              <button className='button' onClick={() => setCurrentTaskId(task.id)}>
                 <h3>{task.title}</h3>
                 <p>{task.text}</p>
               </button>

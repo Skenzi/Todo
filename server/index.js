@@ -25,7 +25,6 @@ const tasks = [
     {
         text: 'text',
         title: 'title',
-        userId: 'f1234f',
         status: 'active',
         user: 'Dimas',
         id: 1,
@@ -33,7 +32,6 @@ const tasks = [
     {
         text: 'text1',
         title: 'title1',
-        userId: 'f1234f',
         status: 'complited',
         user: 'Dimas',
         id: 2,
@@ -41,7 +39,6 @@ const tasks = [
     {
         text: 'text2',
         title: 'title2',
-        userId: 'f1234f',
         status: 'failed',
         user: 'Dimas',
         id: 3,
@@ -49,7 +46,6 @@ const tasks = [
     {
         text: 'text2',
         title: 'title2',
-        userId: 'f1233234f',
         status: 'failed',
         user: 'Dimas',
         id: 4,
@@ -100,8 +96,8 @@ app.get('/data', (request, response) => {
     if(!user) {
         response.send(new Unauthorized());
     }
-    const data = tasks.filter((task) => task.userId === token)
-    console.log(data)
+    const data = tasks.filter((task) => task.user === user.username)
+
     response.send(JSON.stringify(data))
 })
 

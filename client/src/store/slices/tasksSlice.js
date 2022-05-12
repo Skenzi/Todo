@@ -19,7 +19,7 @@ const tasksSlice = createSlice({
       state.tasks.push(newTask);
     },
     setTasks: (state, { payload }) => {
-      state.tasks.push(...payload);
+      state.tasks = payload;
     },
     setStatusTasks: (state, { payload }) => {
       state.statusTasks = payload;

@@ -38,7 +38,7 @@ function TasksPage() {
     });
 
     response.then(({ data }) => {
-      console.log(data)
+      console.log(data, 'addTasks')
       dispatch(setTasks(data));
     })
     .catch(err => {
