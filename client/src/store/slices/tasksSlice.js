@@ -4,7 +4,7 @@ const tasksSlice = createSlice({
   name: 'tasksInfo',
   initialState: {
     tasks: [],
-    currentTaskId: 0,
+    currentTaskId: 1,
     currentTask: null,
     statusTasks: 'active',
   },

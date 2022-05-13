@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './Header';
 import TasksPage from '../pages/TasksPage';
@@ -11,6 +11,8 @@ import ProfilePage from '../pages/ProfilePage';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../store/slices/userSlice';
+import { Task } from '../types/types';
+import { addTask } from '../store/slices/tasksSlice';
 
 function Main() {
   return (
@@ -36,9 +38,21 @@ class SocketApi {
   constructor(socket: WebSocket) {
     this.socket = socket;
   }
+  addNewTask(task: Task) {
+    this.socket.send(JSON.stringify({
+      event: 'newTask',
+      task,
+    }))
+  }
+  changeTask(task: Task) {
+    this.socket.send(JSON.stringify({
+      event: 'changeTask',
+      task,
+    }))
+  }
 }
 
-const connection = (setSocketApi: React.Dispatch<React.SetStateAction<SocketApi | undefined>>) => {
+const connection = (setSocketApi: React.Dispatch<React.SetStateAction<SocketApi | undefined>>, dispatch: Dispatch<any>) => {
   const socket = new WebSocket('ws://localhost:5000/');
     socket.onopen = () => {
       console.log('connected!')
@@ -49,7 +63,12 @@ const connection = (setSocketApi: React.Dispatch<React.SetStateAction<SocketApi 
     }
     socket.onmessage = function(this: WebSocket, ev: MessageEvent<any>) {
       const data = JSON.parse(ev.data);
-      console.log(data, 22);
+      switch(data.event) {
+        case 'newTask':
+          console.log(data)
+          dispatch(addTask(data.task));
+          break;
+      }
     }
 }
 
@@ -58,7 +77,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    connection(setSocketApi);
+    connection(setSocketApi, dispatch);
     const user = getUser();
     if(user) {
       dispatch(setUser(user));
@@ -87,7 +106,7 @@ function App() {
   };
 
   return !socketApi ? <div className='loading'>Loading...</div> : (
-    <apiContext.Provider value={{ socketApi, getUser, logOut, getAutorizedHeader }}>
+    <apiContext.Provider value={{ socketApi, getUser, logOut, getAutorizedHeader, elements }}>
       <BrowserRouter>
         <Header />
         <Main />

@@ -27,6 +27,8 @@ const tasks = [
         title: 'title',
         status: 'active',
         user: 'Dimas',
+        reward: 10,
+        state: 'str',
         id: 1,
     },
     {
@@ -34,6 +36,8 @@ const tasks = [
         title: 'title1',
         status: 'complited',
         user: 'Dimas',
+        reward: 10,
+        state: 'str',
         id: 2,
     },
     {
@@ -41,6 +45,8 @@ const tasks = [
         title: 'title2',
         status: 'failed',
         user: 'Dimas',
+        reward: 10,
+        state: 'str',
         id: 3,
     },
     {
@@ -48,6 +54,8 @@ const tasks = [
         title: 'title2',
         status: 'failed',
         user: 'Dimas',
+        reward: 10,
+        state: 'str',
         id: 4,
     }
 ];
@@ -58,15 +66,21 @@ app.ws('/', (ws, request) => {
         switch(msg.event) {
             case 'connection': 
                 console.log('User connected')
-                ws.send(JSON.stringify({
-                    name: 'user'
-                }))
                 break;
             case 'signUp':
                 console.log('User added')
                 break;
-            case 'getData':
-
+            case 'newTask':
+                const nextId = tasks.length + 1;
+                tasks.push({...msg.task, id: nextId})
+                console.log(tasks.length, nextId)
+                ws.send(JSON.stringify({
+                    task: tasks[nextId - 1],
+                    event: 'newTask'
+                }));
+                break;
+            case 'changeTask':
+                break;  
         }
     })
 })

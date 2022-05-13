@@ -7,11 +7,12 @@ export interface FormLoginProps {
 }
 
 export interface Task {
-    name: string,
     text: string,
     title: string,
     status: string,
-    id: string,
+    reward: number,
+    stat: string
+    id: number,
 }
 
 export interface User {

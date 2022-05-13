@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { currentTask, userSelector } from '../store/selectors/index';
+import { userSelector } from '../store/selectors/index';
 import { deleteTask, setTaskProperty } from '../store/slices/tasksSlice.js';
 import { setLevel, setExp, setStat } from '../store/slices/userSlice.js';
 import { Task } from '../types/types';
@@ -60,9 +60,8 @@ function TaskBody({ task, setStateTaskForm, compliteTask }: TaskBodyProps) {
   );
 }
 
-function TaskNote() {
+function TaskNote({ task }: { task: Task }) {
   const user = useSelector(userSelector);
-  const task = useSelector(currentTask);
   const [stateTaskForm, setStateTaskForm] = useState(false);
   const dispatch = useDispatch();
 
@@ -85,7 +84,7 @@ function TaskNote() {
     }
   
     dispatch(setStat(task.stat));
-    dispatch(setTaskProperty({ id: task.id, property: 'status', value: 'succefull' }));
+    dispatch(setTaskProperty({ id: task.id, property: 'status', value: 'complited' }));
   };
 
 
@@ -97,7 +96,7 @@ function TaskNote() {
     <section className="task-note">
       <img src={paper} alt="scroll" className="task-img" />
       <div className="task-header">
-        <h2 className="task-name">{task.name}</h2>
+        <h2 className="task-name">{task.title}</h2>
         <button type="button" className="button" onClick={removeTask(task.id)}>Выкинуть квест</button>
       </div>
       <div className="task-body">

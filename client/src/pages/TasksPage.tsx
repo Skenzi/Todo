@@ -8,12 +8,9 @@ import { useEffect, useContext } from 'react';
 import apiContext from '../context/index';
 import { useNavigate } from 'react-router-dom';
 import { setTasks, setStatusTasks } from '../store/slices/tasksSlice';
+import { Task } from '../types/types';
 
-interface TasksButtonsProps {
-  setTypeTasks: React.Dispatch<React.SetStateAction<string>>,
-}
-
-function TasksButtons({ setTypeTasks }: TasksButtonsProps) {
+function TasksButtons() {
   const dispatch = useDispatch();
   return (
     <div className="f-row buttons-group">
@@ -27,7 +24,6 @@ function TasksButtons({ setTypeTasks }: TasksButtonsProps) {
 function TasksPage() {
   const dispatch = useDispatch();
   const api = useContext(apiContext);
-  const [typeTasks, setTypeTasks] = useState('active');
   const task = useSelector(currentTask);
   const navigation = useNavigate();
   const {user} = useSelector(userSelector)
@@ -38,7 +34,6 @@ function TasksPage() {
     });
 
     response.then(({ data }) => {
-      console.log(data, 'addTasks')
       dispatch(setTasks(data));
     })
     .catch(err => {
@@ -48,10 +43,10 @@ function TasksPage() {
   }, [user])
   return (
     <>
-      <TasksButtons setTypeTasks={setTypeTasks} />
+      <TasksButtons />
       <div className="f-row">
         <ListTasks />
-        {task && task.status === typeTasks ? <TaskNote /> : null}
+        {task ? <TaskNote task={task} /> : null}
       </div>
     </>
   );

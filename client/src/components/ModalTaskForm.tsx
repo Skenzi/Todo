@@ -4,18 +4,19 @@ import apiContext from '../context/index';
 import { modalSelector } from '../store/selectors/index';
 import { setStateModal } from '../store/slices/modalSlice';
 import { addTask } from '../store/slices/tasksSlice';
+import { useRef } from 'react';
 
 interface ModalFormProps {
   onSubmit: (e: React.FormEvent) => void,
   setTaskData: React.Dispatch<React.SetStateAction<{
-    name: string;
+    title: string;
     text: string;
     dateEnd: string;
     reward: number;
     stat: string;
   }>>,
   taskData: {
-    name: string;
+    title: string;
     text: string;
     dateEnd: string;
     reward: number;
@@ -31,7 +32,7 @@ function ModalForm({
     <form className="form" onSubmit={onSubmit}>
       <div className="form-group">
         <label htmlFor="quest-name" className="form-label">Name</label>
-        <input id="quest-name" className="form-control" required type="text" value={taskData.name} onChange={(e) => setTaskData({ ...taskData, name: e.currentTarget.value })} />
+        <input id="quest-name" className="form-control" required type="text" value={taskData.title} onChange={(e) => setTaskData({ ...taskData, title: e.currentTarget.value })} />
       </div>
       <div className="form-group">
         <label htmlFor="quest-text" className="form-label">Text</label>
@@ -62,30 +63,37 @@ function ModalForm({
 }
 
 function ModalTaskForm() {
-  const { elements } = useContext(apiContext);
+  const { elements, socketApi } = useContext(apiContext);
   const modalState = useSelector(modalSelector);
+  const modalRef = useRef<HTMLDivElement>(null);
   const [taskData, setTaskData] = useState({
-    name: '', text: '', dateEnd: '', reward: 0, stat: '',
+    title: '', text: '', dateEnd: '', reward: 0, stat: '',
   });
   const dispatch = useDispatch();
 
   const closeModal = () => {
     setTaskData({
-      name: '', text: '', dateEnd: '', reward: 0, stat: '',
+      title: '', text: '', dateEnd: '', reward: 0, stat: '',
     });
     dispatch(setStateModal(false));
     elements.body.classList.remove('modal-open');
   };
 
+  const closeModalHandler = (ev: React.MouseEvent) => {
+    if(modalRef.current && !modalRef.current.contains(ev.target as Node)) {
+      closeModal();
+    }
+  }
+
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(addTask(taskData));
+    socketApi.addNewTask(taskData);
     closeModal();
   };
 
   return modalState.show ? (
-    <div className="modal-background">
-      <div role="dialog" aria-modal className="modal">
+    <div className="modal-background" onClick={closeModalHandler}>
+      <div role="dialog" aria-modal ref={modalRef} className="modal">
         <h2 className="modal-caption">Add Quest</h2>
         <ModalForm
           onSubmit={onSubmit}

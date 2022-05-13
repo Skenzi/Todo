@@ -9,21 +9,21 @@ import { Task } from '../types/types';
 function ListTasks() {
   const tasks = useSelector(currentTasks);
   const currentTasksStatus = useSelector(statusTasks);
-  console.log(currentTasksStatus, 'status')
   const dispatch = useDispatch();
   const { elements } = useContext(apiContext);
-  const setModal = () => {
+  const openModal = () => {
     dispatch(setStateModal(true));
     elements.body.classList.add('modal-open');
   };
   return (
     <div className="tasks bg-main">
-      {currentTasksStatus === 'active' ? <button type="button" className="button" onClick={setModal}>Add quest</button> : null}
+      {currentTasksStatus === 'active' ? <button type="button" className="button" onClick={openModal}>Add quest</button> : null}
       <ol className="tasks__list">
         {tasks.map((task: Task) => {
+          console.log(task)
           return (
             <li key={task.id}>
-              <button className='button' onClick={() => setCurrentTaskId(task.id)}>
+              <button className='button' onClick={() => dispatch(setCurrentTaskId(task.id))}>
                 <h3>{task.title}</h3>
                 <p>{task.text}</p>
               </button>

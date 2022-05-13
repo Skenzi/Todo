@@ -10,10 +10,7 @@ export const statusTasks = (state) => state.tasksInfo.statusTasks;
 export const currentTasks = createSelector(
   tasksSelector,
   statusTasks,
-  (tasks, status) => {
-    console.log(status);
-    return tasks.filter((task) => task.status === status);
-  },
+  (tasks, status) => tasks.filter((task) => task.status === status),
 );
 export const currentTask = createSelector(
   currentTasks,
