@@ -5,16 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userSelector } from '../store/selectors/index';
 import { deleteTask, setTaskProperty } from '../store/slices/tasksSlice.js';
 import { setLevel, setExp, setStat } from '../store/slices/userSlice.js';
-import { Task } from '../types/types';
+import { Task, TaskFormProps, TaskBodyProps } from '../types/types';
 
 const paper = require("../images/paper.png") as string;
 const seal = require("../images/seal.png") as string;
 const handWithPen = require("../images/handWithPen.png") as string;
-
-interface TaskFormProps {
-  task: Task,
-  setStateTaskForm: React.Dispatch<React.SetStateAction<boolean>>,
-}
 
 function TaskForm({ task, setStateTaskForm }: TaskFormProps) {
   const dispatch = useDispatch();
@@ -31,12 +26,6 @@ function TaskForm({ task, setStateTaskForm }: TaskFormProps) {
       <button type="button" className="button" onClick={() => setStateTaskForm(false)}>Отменить</button>
     </form>
   );
-}
-
-interface TaskBodyProps {
-  task: Task,
-  setStateTaskForm: React.Dispatch<React.SetStateAction<boolean>>,
-  compliteTask: () => void,
 }
 
 function TaskBody({ task, setStateTaskForm, compliteTask }: TaskBodyProps) {

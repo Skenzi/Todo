@@ -3,11 +3,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { userSelector } from '../store/selectors';
-
-interface DataItemProps {
-  value: string | number,
-  property: string,
-}
+import { DataItemProps } from '../types/types';
 
 function DataItem({ value, property }: DataItemProps) {
   return (

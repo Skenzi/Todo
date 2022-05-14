@@ -1,15 +1,5 @@
 import React from 'react';
-
-interface LoginFormItem {
-  name: string,
-  labelText: string,
-  type: string,
-}
-
-interface FormGroupProps {
-  infoControl: LoginFormItem,
-  onChangeDataForm: (dataKey: string) => (ev: React.ChangeEvent<HTMLInputElement>) => void,
-}
+import { FormGroupProps } from '../types/types';
 
 function FormGroup({
   infoControl, onChangeDataForm,

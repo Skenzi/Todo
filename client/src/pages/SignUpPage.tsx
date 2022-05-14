@@ -1,8 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import apiContext from '../context';
 import FormLogin from '../components/FormLogin';
 import { setUser } from '../store/slices/userSlice';
 
@@ -33,7 +32,6 @@ const infoForm = {
 };
 
 function SignUpPage() {
-  const api = useContext(apiContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState('');

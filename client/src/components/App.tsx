@@ -14,20 +14,6 @@ import { setUser } from '../store/slices/userSlice';
 import { Task } from '../types/types';
 import { addTask, setTasks } from '../store/slices/tasksSlice';
 
-function Main() {
-  return (
-    <main className="flex-container main table-background flex-column">
-      <Routes>
-        <Route path="/" element={<TasksPage />} />
-        <Route path="/loginPage" element={<LoginPage />} />
-        <Route path="/signUpPage" element={<SignUpPage />} />
-        <Route path="/profilePage" element={<ProfilePage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </main>
-  );
-}
-
 const getUser = () => {
   const user = sessionStorage.getItem('user');
   return user && JSON.parse(user);
@@ -69,6 +55,20 @@ const connection = (setSocketApi: React.Dispatch<React.SetStateAction<SocketApi 
           break;
       }
     }
+}
+
+function Main() {
+  return (
+    <main className="flex-container main table-background flex-column">
+      <Routes>
+        <Route path="/" element={<TasksPage />} />
+        <Route path="/loginPage" element={<LoginPage />} />
+        <Route path="/signUpPage" element={<SignUpPage />} />
+        <Route path="/profilePage" element={<ProfilePage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </main>
+  );
 }
 
 function App() {

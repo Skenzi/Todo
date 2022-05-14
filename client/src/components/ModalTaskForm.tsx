@@ -1,29 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import apiContext from '../context/index';
 import { modalSelector } from '../store/selectors/index';
 import { setStateModal } from '../store/slices/modalSlice';
-import { addTask } from '../store/slices/tasksSlice';
-import { useRef } from 'react';
-
-interface ModalFormProps {
-  onSubmit: (e: React.FormEvent) => void,
-  setTaskData: React.Dispatch<React.SetStateAction<{
-    title: string;
-    text: string;
-    dateEnd: string;
-    reward: number;
-    stat: string;
-  }>>,
-  taskData: {
-    title: string;
-    text: string;
-    dateEnd: string;
-    reward: number;
-    stat: string;
-  },
-  closeModal: () => void,
-}
+import { ModalFormProps } from '../types/types';
 
 function ModalForm({
   onSubmit, setTaskData, taskData, closeModal,

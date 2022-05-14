@@ -1,29 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import FormGroup from './FormGroup';
-
-interface LoginFormItem {
-  name: string,
-  labelText: string,
-  type: string,
-}
-
-interface LoginFormProps {
-  onChangeDataForm: (dataKey: string) => (ev: React.ChangeEvent<HTMLInputElement>) => void,
-  error: string,
-  onSubmit: (ev: React.FormEvent) => void,
-  infoForm: {
-    pathLink: string,
-    title: string;
-    btnSubmitText: string;
-    btnLinkText: string;
-    formGroups: {
-        name: string;
-        labelText: string;
-        type: string;
-    }[],
-  }
-}
+import { LoginFormProps, LoginFormItem } from './../types/types';
 
 function LoginForm({
   onChangeDataForm, error, onSubmit, infoForm,
