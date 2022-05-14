@@ -37,7 +37,6 @@ function TasksPage() {
       dispatch(setTasks(data));
     })
     .catch(err => {
-      console.log(err)
       navigation('/loginPage', { replace: true })
     })
   }, [user])

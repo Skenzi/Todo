@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import apiContext from '../context';
 import FormLogin from '../components/FormLogin';
 import { setUser } from '../store/slices/userSlice';
-import { User } from '../types/types';
 
 const formGroups = [
   {
@@ -39,7 +39,18 @@ function SignUpPage() {
   const [dataSignUp, setDataSignUp] = useState({ username: '', password: '', confirmPassword: '' });
   const onSubmit = (ev: React.FormEvent) => {
     ev.preventDefault();
-    navigate('/', { replace: true });
+    const response = axios.post('http://localhost:5000/signup', dataSignUp);
+    response.then(({ data }) => {
+      dispatch(setUser(data))
+      sessionStorage.setItem('user', JSON.stringify(data))
+      navigate('/', { replace: true });
+    }).catch((err) => {
+      if(err.response.status === 403) {
+        setError('Такой уже есть')
+      } else {
+        setError('Проблемы с соединением')
+      }
+    })
   };
   const onChangeDataSignUp = (dataKey: string) => (ev: React.ChangeEvent<HTMLInputElement>) => {
     setDataSignUp({ ...dataSignUp, [dataKey]: ev.target.value });

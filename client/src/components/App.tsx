@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../store/slices/userSlice';
 import { Task } from '../types/types';
-import { addTask } from '../store/slices/tasksSlice';
+import { addTask, setTasks } from '../store/slices/tasksSlice';
 
 function Main() {
   return (
@@ -65,7 +65,6 @@ const connection = (setSocketApi: React.Dispatch<React.SetStateAction<SocketApi 
       const data = JSON.parse(ev.data);
       switch(data.event) {
         case 'newTask':
-          console.log(data)
           dispatch(addTask(data.task));
           break;
       }
@@ -88,7 +87,8 @@ function App() {
     dispatch(setUser({
       username: null,
       token: null,
-    }))
+    }));
+    dispatch(setTasks([]));
     sessionStorage.removeItem('user');
   }
 
@@ -96,7 +96,7 @@ function App() {
     const user = sessionStorage.getItem('user');
     if(user) {
       const {token} = JSON.parse(user);
-      return { Authorization: `Bearer ${token}` };
+      return { Authorization: `${token}` };
     }
     return {};
   }

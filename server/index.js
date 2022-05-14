@@ -17,7 +17,7 @@ const users = [
     {
         username: 'Dimas',
         password: '123456',
-        id: 'f1234f',
+        token: 'f1234f',
     },
 ]
 
@@ -26,7 +26,7 @@ const tasks = [
         text: 'text',
         title: 'title',
         status: 'active',
-        user: 'Dimas',
+        user: 'Dimas111',
         reward: 10,
         state: 'str',
         id: 1,
@@ -85,32 +85,46 @@ app.ws('/', (ws, request) => {
     })
 })
 
-app.post('/signup', (user) => {
-    console.log(user)
+app.post('/signup', (request, response) => {
+    const username = request.body.username;
+    const password = request.body.password;
+    const user = users.find(user => user.username === username);
+    console.log('User signup', user, request.body)
+    if(user) {
+        response.status(403).send(new Conflict());
+        return;
+    }
+    const newUser = {
+        username,
+        password,
+        token: Date.now().toString(16),
+    }
+    users.push(newUser);
+    response.send(JSON.stringify(newUser))
 })
 
 app.post('/login', (request, response) => {
     const username = request.body.username;
     const password = request.body.password;
     const user = users.find(user => user.username === username && user.password === password);
-    console.log('User getted', user, request.body)
     if(!user) {
         response.status(401).send(new Unauthorized());
         return;
     }
     response.send(JSON.stringify({
         username: user.username,
-        token: user.id,
+        token: user.token,
     }))
 })
 
 app.get('/data', (request, response) => {
-    const token = request.headers.authorization.split('Bearer ').join('');
-    const user = users.find(user => user.id === token);
+    const token = request.headers.authorization;
+    const user = users.find(user => user.token === token);
     if(!user) {
-        response.send(new Unauthorized());
+        response.status(401).send(new Unauthorized());
+        return;
     }
-    const data = tasks.filter((task) => task.user === user.username)
+    const data = tasks.filter((task) => task.user === user.username);
 
     response.send(JSON.stringify(data))
 })
