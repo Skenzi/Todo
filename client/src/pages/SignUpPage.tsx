@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import apiContext from '../context';
 import FormLogin from '../components/FormLogin';
@@ -25,6 +25,7 @@ const formGroups = [
 ];
 
 const infoForm = {
+  pathLink: '/loginPage',
   title: 'Регистрация',
   btnSubmitText: 'Зарегистрироваться',
   btnLinkText: 'Уже зарегистрированы?',
@@ -56,7 +57,7 @@ function SignUpPage() {
     setDataSignUp({ ...dataSignUp, [dataKey]: ev.target.value });
   };
   return (
-    <div className="container-sm">
+    <div className="container-sm bg-main">
       <FormLogin
         onChangeDataForm={onChangeDataSignUp}
         error={error}

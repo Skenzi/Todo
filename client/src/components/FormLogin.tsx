@@ -13,6 +13,7 @@ interface LoginFormProps {
   error: string,
   onSubmit: (ev: React.FormEvent) => void,
   infoForm: {
+    pathLink: string,
     title: string;
     btnSubmitText: string;
     btnLinkText: string;
@@ -42,7 +43,7 @@ function LoginForm({
         <button type="submit" className="button button-sm button-submit">{infoForm.btnSubmitText}</button>
       </div>
       <div className="form-footer">
-        <Link to="/signUpPage" type="button" className="button button-sm">{infoForm.btnLinkText}</Link>
+        <Link to={infoForm.pathLink} type="button" className="button button-sm">{infoForm.btnLinkText}</Link>
       </div>
     </form>
   );

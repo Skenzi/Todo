@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import apiContext from '../context';
 import { setUser } from '../store/slices/userSlice';
@@ -20,6 +20,7 @@ const formGroups = [
 ];
 
 const infoForm = {
+  pathLink: '/signUpPage',
   title: 'Вход в систему',
   btnSubmitText: 'Войти',
   btnLinkText: 'Не зарегистрированы?',
