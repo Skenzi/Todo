@@ -3,44 +3,55 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { userSelector } from '../store/selectors';
-import { DataItemProps } from '../types/types';
 
-function DataItem({ value, property }: DataItemProps) {
+interface DataItemProps {
+  data: string | number,
+  name: string,
+}
+
+function DataItem({ data, name }: DataItemProps) {
+  if(typeof data === 'object') {
+    return (
+      <>
+        {Object.entries(data).map(([key, value]) => {
+          console.log(value)
+          return (
+            <div key={key} className="data__item">
+              <span className="data__header">{key}</span>
+              {`: ${value}`}
+            </div>
+          )
+        })}
+      </>
+    )
+  }
   return (
     <div className="data__item">
-      <span className="data__header">{property}</span>
+      <span className="data__header">{name}</span>
       {': '}
-      {value}
+      {data}
     </div>
   );
 }
 
-const userProperties = [
-  {
-    name: 'username',
-    property: 'Name',
-  },
-  {
-    name: 'level',
-    property: 'Level',
-  },
-  {
-    name: 'exp',
-    property: 'Experience',
-  },
-];
+const userProperties = {
+  username: 'Name',
+  level: 'Level',
+  exp: 'Experience',
+  stats: 'Stats',
+};
 
 function ProfilePage() {
-  const user = useSelector(userSelector);
+  const { user } = useSelector(userSelector);
   return (
     <div className="profile bg-main">
       <div className="profile__img" />
       <div className="profile__data">
-        {userProperties.map((item) => (
+        {Object.keys(user).map((key) => (
           <DataItem
-            key={item.name}
-            value={user[item.name]}
-            property={item.property}
+            key={key}
+            data={user[key]}
+            name={key}
           />
         ))}
       </div>

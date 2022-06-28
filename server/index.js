@@ -17,6 +17,13 @@ const users = [
     {
         username: 'Dimas',
         password: '123456',
+        level: 1,
+        exp: 0,
+        stats: {
+            agi: 10,
+            str: 10,
+            int: 10,
+        },
         token: 'f1234f',
     },
 ]
@@ -89,7 +96,6 @@ app.post('/signup', (request, response) => {
     const username = request.body.username;
     const password = request.body.password;
     const user = users.find(user => user.username === username);
-    console.log('User signup', user, request.body)
     if(user) {
         response.status(403).send(new Conflict());
         return;
@@ -113,7 +119,9 @@ app.post('/login', (request, response) => {
     }
     response.send(JSON.stringify({
         username: user.username,
-        token: user.token,
+        level: user.level,
+        stats: user.stats,
+        exp: user.exp,
     }))
 })
 

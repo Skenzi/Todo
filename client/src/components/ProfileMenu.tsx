@@ -8,12 +8,13 @@ function ProfileMenu() {
   const { user } = useSelector(userSelector);
   const api = useContext(apiContext);
 
-  const openMenuHandler = (ev: React.MouseEvent<HTMLButtonElement>) => {
-    (ev.target as HTMLElement).nextElementSibling?.classList.toggle('show')
+  const switchMenuHandler = (ev: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
+    const dropdowmMenu = document.querySelector('.header')?.querySelector('.dropdown-menu');
+    dropdowmMenu?.classList.toggle('show')
   };
   return (
     <>
-      <button type="button" className="button button-bar button-dropdown" onClick={openMenuHandler}>{user.username}</button>
+      <button type="button" className="button button-bar button-dropdown" onClick={switchMenuHandler}>{user.username}</button>
       <nav className="dropdown-menu bg-main-dark">
         <li>
           <div className="dropdown-menu-item">
@@ -22,7 +23,7 @@ function ProfileMenu() {
         </li>
         <li><hr className="dropdown-divider" /></li>
         <li>
-          <Link className="dropdown-menu-item" to="/profilePage">Профиль</Link>
+          <Link className="dropdown-menu-item" onClick={switchMenuHandler} to="/profilePage">Профиль</Link>
         </li>
         <li><hr className="dropdown-divider" /></li>
         <li>

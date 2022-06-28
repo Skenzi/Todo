@@ -77,8 +77,3 @@ export interface TaskBodyProps {
     setStateTaskForm: React.Dispatch<React.SetStateAction<boolean>>,
     compliteTask: () => void,
 }
-
-export interface DataItemProps {
-    value: string | number,
-    property: string,
-}
