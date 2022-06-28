@@ -41,6 +41,7 @@ function LoginPage() {
         dispatch(setUser(data))
         sessionStorage.setItem('user', JSON.stringify(data));
         navigate('/', { replace: true });
+        console.log(123)
      }).catch((err) => {
        if(err.response.status === 401) {
         setError('Неправильное имя пользователя или пароль');
