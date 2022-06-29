@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from "../images/TodoQuestsLogo.svg";
-import ProfileMenu from './ProfileMenu';
+import DropdownMenu from './DropdowmMenu';
 import { useSelector } from 'react-redux';
 import { userSelector } from '../store/selectors';
 
@@ -10,12 +10,12 @@ function Header() {
 
   return (
     <header className="header bg-main">
-      <div className="header-item"><img src={logo} alt="logo" className="logo" /></div>
-      <nav className="header-item">
+      <div className="header__logo"><img src={logo} alt="logo" className="logo" /></div>
+      <nav className="header__menu">
         <Link to="/" className="button button-bar">Квесты</Link>
       </nav>
-      <div className="header-item">
-        {!user?.token ? <Link to="/loginPage" type="button" className="button button-bar">Войти/Зарегистрироваться</Link> : <ProfileMenu />}
+      <div className="header__dropdown">
+        {!user?.token ? <Link to="/loginPage" type="button" className="button button-bar">Войти/Зарегистрироваться</Link> : <DropdownMenu />}
       </div>
     </header>
   );

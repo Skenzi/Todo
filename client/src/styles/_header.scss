@@ -2,14 +2,10 @@
     display: flex;
     padding: 20px 10px;
     align-items: center;
-    &-item {
-        display: flex;
-        position: relative;
-        &:nth-child(1n + 2) {
-            margin-left: 20px;
-        }
-        &:last-child {
-            margin-left: auto;
-        }
+    &__menu {
+        margin-left: 20px;
+    }
+    &__dropdown {
+        margin-left: auto;
     }
 }

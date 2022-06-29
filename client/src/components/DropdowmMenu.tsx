@@ -3,19 +3,22 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import apiContext from '../context';
 import { userSelector } from '../store/selectors';
+import { useState } from 'react';
 
 function ProfileMenu() {
   const { user } = useSelector(userSelector);
+  const [isOpen, setStateMenu] = useState<boolean>(false);
+  console.log(isOpen)
   const api = useContext(apiContext);
 
   const switchMenuHandler = (ev: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
-    const dropdowmMenu = document.querySelector('.header')?.querySelector('.dropdown-menu');
-    dropdowmMenu?.classList.toggle('show')
+    setStateMenu((prev) => !prev);
   };
   return (
-    <>
+    <div className="dropdown">
       <button type="button" className="button button-bar button-dropdown" onClick={switchMenuHandler}>{user.username}</button>
-      <nav className="dropdown-menu bg-main-dark">
+      {isOpen ? (
+        <nav className="dropdown-menu bg-main-dark">
         <li>
           <div className="dropdown-menu-item">
             <div>{user.username}</div>
@@ -30,7 +33,8 @@ function ProfileMenu() {
           <button type="button" className="button button-outline dropdown-menu-item" onClick={() => api.logOut()}>Выйти</button>
         </li>
       </nav>
-    </>
+      ) : null}
+    </div>
   );
 }
 
