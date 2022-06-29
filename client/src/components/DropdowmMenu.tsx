@@ -8,7 +8,7 @@ import { useState } from 'react';
 function ProfileMenu() {
   const { user } = useSelector(userSelector);
   const [isOpen, setStateMenu] = useState<boolean>(false);
-  console.log(isOpen)
+
   const api = useContext(apiContext);
 
   const switchMenuHandler = (ev: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
@@ -19,19 +19,13 @@ function ProfileMenu() {
       <button type="button" className="button button-bar button-dropdown" onClick={switchMenuHandler}>{user.username}</button>
       {isOpen ? (
         <nav className="dropdown-menu bg-main-dark">
-        <li>
-          <div className="dropdown-menu-item">
-            <div>{user.username}</div>
-          </div>
-        </li>
-        <li><hr className="dropdown-divider" /></li>
-        <li>
-          <Link className="dropdown-menu-item" onClick={switchMenuHandler} to="/profilePage">Профиль</Link>
-        </li>
-        <li><hr className="dropdown-divider" /></li>
-        <li>
-          <button type="button" className="button button-outline dropdown-menu-item" onClick={() => api.logOut()}>Выйти</button>
-        </li>
+        <div className="dropdown-menu__item">
+          <Link className="dropdown-menu__link" onClick={switchMenuHandler} to="/profilePage">Профиль</Link>
+        </div>
+        <hr className="dropdown-divider" />
+        <div className="dropdown-menu__item">
+          <button type="button" className="button button-outline" onClick={() => api.logOut()}>Выйти</button>
+        </div>
       </nav>
       ) : null}
     </div>
