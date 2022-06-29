@@ -78,6 +78,9 @@
     }
     &__list {
         margin-top: 10px;
+        &-button {
+            background-color: aliceblue;
+        }
     }
     & li:nth-child(1n + 2) {
         margin-top: 7px;

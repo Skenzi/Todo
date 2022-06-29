@@ -17,13 +17,13 @@ function ListTasks() {
   };
   return (
     <div className="tasks bg-main">
-      {currentTasksStatus === 'active' ? <button type="button" className="button" onClick={openModal}>Add quest</button> : null}
+      {currentTasksStatus === 'active' ? <button type="button" className="button tasks__list-button" onClick={openModal}>Add quest</button> : null}
       <ol className="tasks__list">
         {tasks.map((task: Task) => {
           console.log(task)
           return (
             <li key={task.id}>
-              <button className='button' onClick={() => dispatch(setCurrentTaskId(task.id))}>
+              <button className='button tasks__list-button' onClick={() => dispatch(setCurrentTaskId(task.id))}>
                 <h3>{task.title}</h3>
                 <p>{task.text}</p>
               </button>

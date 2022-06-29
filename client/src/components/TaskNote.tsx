@@ -7,9 +7,9 @@ import { deleteTask, setTaskProperty } from '../store/slices/tasksSlice.js';
 import { setLevel, setExp, setStat } from '../store/slices/userSlice.js';
 import { Task, TaskFormProps, TaskBodyProps } from '../types/types';
 
-const paper = require("../images/paper.png") as string;
-const seal = require("../images/seal.png") as string;
-const handWithPen = require("../images/handWithPen.png") as string;
+const paper = require("../images/paper.png");
+const seal = require("../images/seal.png");
+const handWithPen = require("../images/handWithPen.png");
 
 function TaskForm({ task, setStateTaskForm }: TaskFormProps) {
   const dispatch = useDispatch();

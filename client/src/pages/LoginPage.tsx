@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import apiContext from '../context';
 import { setUser } from '../store/slices/userSlice';
@@ -41,7 +41,6 @@ function LoginPage() {
         dispatch(setUser(data))
         sessionStorage.setItem('user', JSON.stringify(data));
         navigate('/', { replace: true });
-        console.log(123)
      }).catch((err) => {
        if(err.response.status === 401) {
         setError('Неправильное имя пользователя или пароль');

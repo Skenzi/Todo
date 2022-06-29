@@ -18,6 +18,12 @@ export interface Task {
 export interface User {
     username: string,
     password: string,
+    exp: number,
+    stats: {
+        agi: number,
+        str: number,
+        int: number,
+    }
 }
 
 export interface LoginFormItem {

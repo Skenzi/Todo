@@ -11,16 +11,18 @@
 
 * {
     box-sizing: border-box;
-}
-body, h1, h2, h3, ol, ul {
     margin: 0;
     padding: 0;
     font-family: 'MedievalSharp', cursive;
+}
+body {
+    background-color: antiquewhite;
 }
 ol, ul {
     list-style-type: none;
 }
 button {
-    background-color: white;
+    background-color: transparent;
     border: none;
+    cursor: pointer;
 }

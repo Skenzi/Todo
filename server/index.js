@@ -122,6 +122,7 @@ app.post('/login', (request, response) => {
         level: user.level,
         stats: user.stats,
         exp: user.exp,
+        token: user.token,
     }))
 })
 

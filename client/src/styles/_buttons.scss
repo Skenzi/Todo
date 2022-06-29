@@ -1,7 +1,6 @@
 .button {
     padding: 15px 10px;
     font-family: inherit;
-    cursor: pointer;
     &-sm {
         padding: 5px;
         min-width: 15%;
@@ -25,12 +24,10 @@
         }
     }
     &-outline {
-        background-color: transparent;
         padding: 0;
     }
     &-with-img {
         width: 80px;
-        background-color: transparent;
         padding: 0 !important;
     }
     &-img {
