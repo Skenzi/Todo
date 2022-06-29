@@ -83,7 +83,7 @@ function TaskNote({ task }: { task: Task }) {
 
   return (
     <section className="task-note">
-      <img src={paper} alt="scroll" className="task-img" />
+      <img src={String(paper)} alt="scroll" className="task-img" />
       <div className="task-header">
         <h2 className="task-name">{task.title}</h2>
         <button type="button" className="button" onClick={removeTask(task.id)}>Выкинуть квест</button>

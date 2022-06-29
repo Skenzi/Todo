@@ -43,9 +43,9 @@
     &-img {
         width: 100%;
         height: 100%;
+        position: absolute;
         left: 0;
         top: 0;
-        position: absolute;
         z-index: -1;
     }
     &-name {
@@ -61,11 +61,13 @@
     position: absolute;
     left: 20px;
     bottom: 20px;
+    background-image: url('../images/seal.png');
 }
 .img-change {
     position: absolute;
     right: 20px;
     bottom: 20px;
+    background-image: url('../images/handWithPen.png');
 }
 .tasks {
     width: 20%;

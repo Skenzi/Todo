@@ -40,15 +40,16 @@ module.exports = {
         use: 'pug-loader',
       },
       {
-        test: /\.(svg|eot|ttf|woff|woff2)$/,
-        use: 'file-loader',
+        test: /\.(eot|ttf|woff|woff2)$/,
+        loader: 'file-loader',
       },
       {
         test: /\.png$/,
-        loader: 'url-loader',
-        options: {
-          limit: 25000,
-        },
+        type: 'asset/resource',
+      },
+      {
+        test: /\.svg$/,
+        type: 'asset/inline',
       },
     ],
   },
