@@ -72,11 +72,10 @@ function Main() {
 }
 
 function App() {
-  const [socketApi, setSocketApi] = useState<SocketApi>();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    connection(setSocketApi, dispatch);
+    
     const user = getUser();
     if(user) {
       dispatch(setUser(user));
@@ -105,8 +104,8 @@ function App() {
     body: document.querySelector('body'),
   };
 
-  return !socketApi ? <div className='loading'>Loading...</div> : (
-    <apiContext.Provider value={{ socketApi, getUser, logOut, getAutorizedHeader, elements }}>
+  return (
+    <apiContext.Provider value={{ getUser, logOut, getAutorizedHeader, elements }}>
       <BrowserRouter>
         <Header />
         <Main />

@@ -1,8 +1,10 @@
 import React, { useContext, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 import apiContext from '../context/index';
 import { modalSelector } from '../store/selectors/index';
 import { setStateModal } from '../store/slices/modalSlice';
+import { addTask } from '../store/slices/tasksSlice';
 import { ModalFormProps } from '../types/types';
 
 function ModalForm({
@@ -67,7 +69,13 @@ function ModalTaskForm() {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    socketApi.addNewTask(taskData);
+    const res = axios.post('http://localhost:5000/addTask', {task: taskData});
+    res.then(({ data }) => {
+      console.log(data)
+      dispatch(addTask(data))
+    }).catch((err) => {
+      console.log('Error modal task')
+    })
     closeModal();
   };
 

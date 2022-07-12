@@ -1,8 +1,5 @@
 const express = require('express')
 const app = express();
-const aWss = require('express-ws')(app);
-const fs = require('fs');
-const path = require('path');
 const cors = require('cors');
 const HttpErrors = require('http-errors');
 
@@ -67,31 +64,6 @@ const tasks = [
     }
 ];
 
-app.ws('/', (ws, request) => {
-    ws.on('message', (msg) => {
-        msg = JSON.parse(msg);
-        switch(msg.event) {
-            case 'connection': 
-                console.log('User connected')
-                break;
-            case 'signUp':
-                console.log('User added')
-                break;
-            case 'newTask':
-                const nextId = tasks.length + 1;
-                tasks.push({...msg.task, id: nextId})
-                console.log(tasks.length, nextId)
-                ws.send(JSON.stringify({
-                    task: tasks[nextId - 1],
-                    event: 'newTask'
-                }));
-                break;
-            case 'changeTask':
-                break;  
-        }
-    })
-})
-
 app.post('/signup', (request, response) => {
     const username = request.body.username;
     const password = request.body.password;
@@ -109,9 +81,16 @@ app.post('/signup', (request, response) => {
     response.send(JSON.stringify(newUser))
 })
 
+app.post('/addTask', (req, res) => {
+    const { task } = req.body;
+    const nextId = tasks.length;
+    const newTask = {...task, id: nextId};
+    tasks.push(newTask);
+    res.send(JSON.stringify(newTask));
+})
+
 app.post('/login', (request, response) => {
-    const username = request.body.username;
-    const password = request.body.password;
+    const {username, password} = request.body;
     const user = users.find(user => user.username === username && user.password === password);
     if(!user) {
         response.status(401).send(new Unauthorized());
