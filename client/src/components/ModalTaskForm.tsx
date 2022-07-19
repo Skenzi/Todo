@@ -34,7 +34,7 @@ function ModalForm({
       </div>
       <div className="form-group">
         <label htmlFor="quest-date" className="form-label">Срок</label>
-        <input id="quest-date" className="form-control" required value={taskData.dateEnd} type="date" onChange={(e) => setTaskData({ ...taskData, dateEnd: e.currentTarget.value })} />
+        <input id="quest-date" className="form-control" required value={taskData.dateEnd} type="date" onChange={(e) => setTaskData({ ...taskData, dateEnd: new Date(e.currentTarget.value).getTime() })} />
       </div>
       <div className="button-group">
         <button type="submit" className="button button-submit">Add</button>
@@ -45,17 +45,17 @@ function ModalForm({
 }
 
 function ModalTaskForm() {
-  const { elements, socketApi } = useContext(apiContext);
+  const { elements } = useContext(apiContext);
   const modalState = useSelector(modalSelector);
   const modalRef = useRef<HTMLDivElement>(null);
   const [taskData, setTaskData] = useState({
-    title: '', text: '', dateEnd: '', reward: 0, stat: '',
+    title: '', text: '', dateEnd: 0, reward: 0, stat: '',
   });
   const dispatch = useDispatch();
 
   const closeModal = () => {
     setTaskData({
-      title: '', text: '', dateEnd: '', reward: 0, stat: '',
+      title: '', text: '', dateEnd: 0, reward: 0, stat: '',
     });
     dispatch(setStateModal(false));
     elements.body.classList.remove('modal-open');

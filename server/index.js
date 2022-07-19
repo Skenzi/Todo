@@ -2,6 +2,7 @@ const express = require('express')
 const app = express();
 const cors = require('cors');
 const HttpErrors = require('http-errors');
+const fs = require('fs');
 
 const { Conflict, Unauthorized } = HttpErrors;
 
@@ -25,44 +26,31 @@ const users = [
     },
 ]
 
-const tasks = [
-    {
-        text: 'text',
-        title: 'title',
-        status: 'active',
-        user: 'Dimas111',
-        reward: 10,
-        state: 'str',
-        id: 1,
-    },
-    {
-        text: 'text1',
-        title: 'title1',
-        status: 'complited',
-        user: 'Dimas',
-        reward: 10,
-        state: 'str',
-        id: 2,
-    },
-    {
-        text: 'text2',
-        title: 'title2',
-        status: 'failed',
-        user: 'Dimas',
-        reward: 10,
-        state: 'str',
-        id: 3,
-    },
-    {
-        text: 'text2',
-        title: 'title2',
-        status: 'failed',
-        user: 'Dimas',
-        reward: 10,
-        state: 'str',
-        id: 4,
+const getTasks = () => {
+    const data = fs.readFileSync('./data.json', 'utf-8')
+    return JSON.parse(data);
+}
+
+const writeToFile = (path, data) => {
+    const json = JSON.stringify(data);
+    fs.writeFileSync(path, json);
+}
+
+const getDataUser = (user) => {
+    const data = getTasks();
+    return data.filter((task) => task.user === user.username);
+}
+
+const updateTasks = () => {
+    const tasks = getTasks();
+    for(const task of tasks) {
+        const now = Date.now();
+        if(task.date < now) {
+            task.status = 'failed';
+        }
     }
-];
+    writeToFile(tasks);
+}
 
 app.post('/signup', (request, response) => {
     const username = request.body.username;
@@ -82,16 +70,27 @@ app.post('/signup', (request, response) => {
 })
 
 app.post('/addTask', (req, res) => {
+    const tasks = getTasks();
     const { task } = req.body;
+    console.log(task)
     const nextId = tasks.length;
     const newTask = {...task, id: nextId};
-    tasks.push(newTask);
     res.send(JSON.stringify(newTask));
+    writeToFile('./data.json', [...tasks, newTask]);
+})
+
+app.delete('/deleteTask/:id', (req, res) => {
+    const tasks = getTasks();
+    const idTask = +req.params.id;
+    const newTasks = tasks.filter(task => task.id !== idTask);
+    res.send('Успешно удалено');
+    writeToFile('./data.json', newTasks);
 })
 
 app.post('/login', (request, response) => {
     const {username, password} = request.body;
     const user = users.find(user => user.username === username && user.password === password);
+    updateTasks();
     if(!user) {
         response.status(401).send(new Unauthorized());
         return;
@@ -112,7 +111,7 @@ app.get('/data', (request, response) => {
         response.status(401).send(new Unauthorized());
         return;
     }
-    const data = tasks.filter((task) => task.user === user.username);
+    const data = getDataUser(user);
 
     response.send(JSON.stringify(data))
 })

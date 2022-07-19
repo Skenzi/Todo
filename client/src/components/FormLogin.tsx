@@ -21,7 +21,7 @@ function LoginForm({
         <button type="submit" className="button button-sm button-submit">{infoForm.btnSubmitText}</button>
       </div>
       <div className="form-footer">
-        <Link to={infoForm.pathLink} type="button" className="button button-sm">{infoForm.btnLinkText}</Link>
+        <Link to={infoForm.pathLink} type="button" className="button button-sm button-transparent">{infoForm.btnLinkText}</Link>
       </div>
     </form>
   );

@@ -1,5 +1,6 @@
 // TODO: add reward
 
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSelector } from '../store/selectors/index';
@@ -35,7 +36,7 @@ function TaskBody({ task, setStateTaskForm, compliteTask }: TaskBodyProps) {
       <div className="task-reward" data-exp="100">
         <h2 className="task-reward-title">Награда</h2>
         <div className="task-reward-text">
-          опыта
+          {task.reward} очков опыта
         </div>
       </div>
       {task.status === 'active' ? (
@@ -79,6 +80,7 @@ function TaskNote({ task }: { task: Task }) {
 
   const removeTask = (id: number) => () => {
     dispatch(deleteTask(id));
+    axios.delete('http://localhost:5000/deleteTask/' + id);
   };
 
   return (

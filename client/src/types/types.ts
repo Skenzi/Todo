@@ -11,6 +11,7 @@ export interface Task {
     title: string,
     status: string,
     reward: number,
+    dateEnd: number;
     stat: string
     id: number,
 }
@@ -59,14 +60,14 @@ export interface ModalFormProps {
     setTaskData: React.Dispatch<React.SetStateAction<{
       title: string;
       text: string;
-      dateEnd: string;
+      dateEnd: number;
       reward: number;
       stat: string;
     }>>,
     taskData: {
       title: string;
       text: string;
-      dateEnd: string;
+      dateEnd: number;
       reward: number;
       stat: string;
     },
