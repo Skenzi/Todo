@@ -7,7 +7,7 @@ import { userSelector } from '../store/selectors';
 
 function Header() {
   const { user } = useSelector(userSelector);
-
+  console.log('render')
   return (
     <header className="header bg-main">
       <div className="header__logo"><img src={logo} alt="logo" className="logo" /></div>

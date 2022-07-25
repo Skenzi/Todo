@@ -49,7 +49,7 @@ const updateTasks = () => {
             task.status = 'failed';
         }
     }
-    writeToFile(tasks);
+    writeToFile('./data.json', tasks);
 }
 
 app.post('/signup', (request, response) => {
@@ -72,7 +72,6 @@ app.post('/signup', (request, response) => {
 app.post('/addTask', (req, res) => {
     const tasks = getTasks();
     const { task } = req.body;
-    console.log(task)
     const nextId = tasks.length;
     const newTask = {...task, id: nextId};
     res.send(JSON.stringify(newTask));
@@ -87,8 +86,17 @@ app.delete('/deleteTask/:id', (req, res) => {
     writeToFile('./data.json', newTasks);
 })
 
+app.put('/updateTask', (req, res) => {
+    const tasks = getTasks();
+    const idTask = +req.params.id;
+    const newTasks = tasks.filter(task => task.id !== idTask);
+    res.send('Успешно удалено');
+    writeToFile('./data.json', newTasks);
+})
+
 app.post('/login', (request, response) => {
-    const {username, password} = request.body;
+    const { username, password } = request.body;
+    console.log(request.body)
     const user = users.find(user => user.username === username && user.password === password);
     updateTasks();
     if(!user) {
@@ -107,13 +115,13 @@ app.post('/login', (request, response) => {
 app.get('/data', (request, response) => {
     const token = request.headers.authorization;
     const user = users.find(user => user.token === token);
+    console.log(request.headers)
     if(!user) {
         response.status(401).send(new Unauthorized());
         return;
     }
     const data = getDataUser(user);
-
-    response.send(JSON.stringify(data))
+    response.send(data);
 })
 
 app.listen(PORT, () => console.log('server started!'))

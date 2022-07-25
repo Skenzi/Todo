@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -27,7 +27,7 @@ const infoForm = {
   formGroups,
 };
 
-function LoginPage() {
+const LoginPage = memo(() => {
   const api = useContext(apiContext);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -61,6 +61,6 @@ function LoginPage() {
       />
     </div>
   );
-}
+});
 
 export default LoginPage;

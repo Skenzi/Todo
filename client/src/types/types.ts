@@ -11,8 +11,8 @@ export interface Task {
     title: string,
     status: string,
     reward: number,
-    dateEnd: number;
-    stat: string
+    dateEnd: number,
+    stat: string,
     id: number,
 }
 

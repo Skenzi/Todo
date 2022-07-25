@@ -6,7 +6,7 @@ import TaskNote from '../components/TaskNote';
 import { currentTask, userSelector } from '../store/selectors/index.js';
 import { useEffect, useContext } from 'react';
 import apiContext from '../context/index';
-import { useNavigate } from 'react-router-dom';
+import { Location, useNavigate } from 'react-router-dom';
 import { setTasks, setStatusTasks } from '../store/slices/tasksSlice';
 import { Task } from '../types/types';
 
@@ -21,25 +21,26 @@ function TasksButtons() {
   );
 }
 
-function TasksPage() {
+const TasksPage = () => {
   const dispatch = useDispatch();
   const api = useContext(apiContext);
   const task = useSelector(currentTask);
   const navigation = useNavigate();
-  const {user} = useSelector(userSelector)
-
+  const {user} = useSelector(userSelector);
   useEffect(() => {
     const response = axios.get('http://localhost:5000/data', {
       headers: api.getAutorizedHeader(),
     });
-
+    console.log(user)
     response.then(({ data }) => {
       dispatch(setTasks(data));
     })
     .catch(err => {
+      console.log(err)
       navigation('/loginPage', { replace: true })
     })
   }, [user])
+
   return (
     <>
       <TasksButtons />
