@@ -31,7 +31,6 @@ const TasksPage = () => {
     const response = axios.get('http://localhost:5000/data', {
       headers: api.getAutorizedHeader(),
     });
-    console.log(user)
     response.then(({ data }) => {
       dispatch(setTasks(data));
     })

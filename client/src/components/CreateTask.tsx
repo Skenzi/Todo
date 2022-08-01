@@ -35,7 +35,7 @@ const CreateTask = ({ closeModal }: { closeModal: () => void}) => {
       </div>
       <div className="form-group">
         <label htmlFor="quest-reward" className="form-label">Какая характеристика повышается?</label>
-        <select name="stats" defaultValue="str" className="form-control" onChange={(e) => setTaskData({ ...taskData, stat: e.currentTarget.value })}>
+        <select name="stats" defaultValue="str" className="form-control" onChange={(e) => setTaskData({ ...taskData, stat: e.target.value })}>
           <option value="str">str</option>
           <option value="agi">agi</option>
           <option value="int">int</option>

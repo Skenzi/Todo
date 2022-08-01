@@ -10,11 +10,8 @@ const tasksSlice = createSlice({
   },
   reducers: {
     addTask: (state, { payload }) => {
-      const date = new Date();
-      const day = date.getTime();
-      const dateStart = `${date.getFullYear()}-${date.getMonth()}-${day < 10 ? `0${day}` : day}`;
       const newTask = {
-        ...payload, reward: +payload.reward, status: 'active', id: Date.now(), dateStart,
+        ...payload, reward: +payload.reward, status: 'active', id: Date.now(), dateStart: Date.now(),
       };
       state.tasks.push(newTask);
     },

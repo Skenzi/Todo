@@ -40,6 +40,7 @@ const LoginPage = memo(() => {
      .then(({data})=> {
         dispatch(setUser(data))
         sessionStorage.setItem('user', JSON.stringify(data));
+        console.log('logIn')
         navigate('/', { replace: true });
      }).catch((err) => {
        if(err.response.status === 401) {
