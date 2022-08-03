@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { currentTasks, statusTasks } from '../store/selectors';
+import { currentTasks, currentTab } from '../store/selectors';
 import { setCurrentTaskId } from '../store/slices/tasksSlice';
 import { setStateModal } from '../store/slices/modalSlice';
 import apiContext from '../context/index';
@@ -8,7 +8,7 @@ import { Task } from '../types/types';
 
 function ListTasks() {
   const tasks = useSelector(currentTasks);
-  const currentTasksStatus = useSelector(statusTasks);
+  const currentTasksStatus = useSelector(currentTab);
   const dispatch = useDispatch();
   const { elements } = useContext(apiContext);
   const openModal = () => {

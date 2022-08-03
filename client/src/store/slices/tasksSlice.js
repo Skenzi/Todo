@@ -1,12 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+/*
+const thunkTest = createAsyncThunk(
+  'tasksInfo/setContentTask',
+  async () => {
+    console.log('thunkTest');
+  },
+);
+*/
 const tasksSlice = createSlice({
   name: 'tasksInfo',
   initialState: {
     tasks: [],
     currentTaskId: 1,
     currentTask: null,
-    statusTasks: 'active',
+    currentTab: 'active',
   },
   reducers: {
     addTask: (state, { payload }) => {
@@ -18,8 +25,8 @@ const tasksSlice = createSlice({
     setTasks: (state, { payload }) => {
       state.tasks = payload;
     },
-    setStatusTasks: (state, { payload }) => {
-      state.statusTasks = payload;
+    setCurrentTab: (state, { payload }) => {
+      state.currentTab = payload;
     },
     deleteTask: (state, { payload }) => {
       const filtredTasks = state.tasks.filter(({ id }) => id !== payload);
@@ -28,7 +35,7 @@ const tasksSlice = createSlice({
     setCurrentTaskId: (state, { payload }) => {
       state.currentTaskId = payload;
     },
-    setTaskProperty: (state, { payload }) => {
+    setContentTask: (state, { payload }) => {
       const currentTask = state.tasks.find((task) => payload.id === task.id);
       currentTask[payload.property] = payload.value;
     },
@@ -36,7 +43,7 @@ const tasksSlice = createSlice({
 });
 
 export const {
-  addTask, deleteTask, setCurrentTaskId, setTaskProperty, setTasks, setStatusTasks,
+  addTask, deleteTask, setCurrentTaskId, setContentTask, setTasks, setCurrentTab,
 } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

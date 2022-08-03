@@ -4,8 +4,8 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSelector } from '../store/selectors/index';
-import { deleteTask, setTaskProperty } from '../store/slices/tasksSlice.js';
-import { setLevel, setExp, setStat } from '../store/slices/userSlice.js';
+import { deleteTask, setContentTask } from '../store/slices/tasksSlice.js';
+import { setLevel, setExp } from '../store/slices/userSlice.js';
 import { Task, TaskFormProps, TaskBodyProps } from '../types/types';
 
 const paper = require("../images/paper.png");
@@ -17,7 +17,8 @@ function TaskForm({ task, setStateTaskForm }: TaskFormProps) {
   const [newText, setText] = useState(task.text);
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(setTaskProperty({ id: task.id, property: 'text', value: newText }));
+    dispatch(setContentTask({ id: task.id, property: 'text', value: newText }));
+    axios.put('http://localhost:5000/changeTask', { id: task.id, property: 'text', value: newText })
     setStateTaskForm(false);
   };
   return (
@@ -72,9 +73,9 @@ function TaskNote({ task }: { task: Task }) {
     } else {
       dispatch(setExp(newExpUser));
     }
-  
-    dispatch(setStat(task.stat));
-    dispatch(setTaskProperty({ id: task.id, property: 'status', value: 'complited' }));
+    
+    dispatch(setContentTask({ id: task.id, property: 'status', value: 'complited' }));
+    axios.put('http://localhost:5000/changeTask', { id: task.id, property: 'status', value: 'complited' })
   };
 
 

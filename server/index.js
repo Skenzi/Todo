@@ -86,12 +86,17 @@ app.delete('/deleteTask/:id', (req, res) => {
     writeToFile('./data.json', newTasks);
 })
 
-app.put('/updateTask', (req, res) => {
+app.put('/changeTask', (req, res) => {
+    const { id, property, value } = req.body;
     const tasks = getTasks();
-    const idTask = +req.params.id;
-    const newTasks = tasks.filter(task => task.id !== idTask);
-    res.send('Успешно обновлено');
-    writeToFile('./data.json', newTasks);
+    const task = tasks.find(item => item.id === id)
+    task[property] = value;
+    try {
+        res.send('Успешно изменено')
+    } catch(e) {
+        res.send('Не удалось перезаписать')
+    }
+    writeToFile('./data.json', tasks);
 })
 
 app.post('/login', (request, response) => {

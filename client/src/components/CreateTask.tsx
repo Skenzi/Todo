@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useDispatch } from 'react-redux';
 import { addTask } from "../store/slices/tasksSlice";
+import apiContext from '../context/index';
 
 const CreateTask = ({ closeModal }: { closeModal: () => void}) => {
+  const api = useContext(apiContext);
+  const user = api.getUser();
   const dispatch = useDispatch();
     const [taskData, setTaskData] = useState({
-        title: '', text: '', dateEnd: 0, reward: 0, stat: '',
+        title: '', text: '', dateEnd: 0, reward: 0, stat: 'str', user: user.username, status: 'active'
     });
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         const res = axios.post('http://localhost:5000/addTask', {task: taskData});
         res.then(({ data }) => {
-          console.log(data)
           dispatch(addTask(data))
         }).catch((err) => {
           console.log('Error modal task')

@@ -6,17 +6,16 @@ import TaskNote from '../components/TaskNote';
 import { currentTask, userSelector } from '../store/selectors/index.js';
 import { useEffect, useContext } from 'react';
 import apiContext from '../context/index';
-import { Location, useNavigate } from 'react-router-dom';
-import { setTasks, setStatusTasks } from '../store/slices/tasksSlice';
-import { Task } from '../types/types';
+import { useNavigate } from 'react-router-dom';
+import { setTasks, setCurrentTab } from '../store/slices/tasksSlice';
 
 function TasksButtons() {
   const dispatch = useDispatch();
   return (
     <div className="f-row buttons-group">
-      <button type="button" onClick={() => dispatch(setStatusTasks('active'))} className="button button-bar button-lg">Active</button>
-      <button type="button" onClick={() => dispatch(setStatusTasks('complited'))} className="button button-bar button-lg">Complited</button>
-      <button type="button" onClick={() => dispatch(setStatusTasks('failed'))} className="button button-bar button-lg">Failed</button>
+      <button type="button" onClick={() => dispatch(setCurrentTab('active'))} className="button button-bar button-lg">Active</button>
+      <button type="button" onClick={() => dispatch(setCurrentTab('complited'))} className="button button-bar button-lg">Complited</button>
+      <button type="button" onClick={() => dispatch(setCurrentTab('failed'))} className="button button-bar button-lg">Failed</button>
     </div>
   );
 }
@@ -32,6 +31,7 @@ const TasksPage = () => {
       headers: api.getAutorizedHeader(),
     });
     response.then(({ data }) => {
+      console.log(data)
       dispatch(setTasks(data));
     })
     .catch(err => {
