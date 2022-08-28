@@ -11,23 +11,13 @@ app.use(express.json())
 
 const PORT = process.env.PORT || 5000;
 
-const users = [
-    {
-        username: 'Dimas',
-        password: '123456',
-        level: 1,
-        exp: 0,
-        stats: {
-            agi: 10,
-            str: 10,
-            int: 10,
-        },
-        token: 'f1234f',
-    },
-]
-
 const getTasks = () => {
-    const data = fs.readFileSync('./data.json', 'utf-8')
+    const data = fs.readFileSync('./data/data.json', 'utf-8')
+    return JSON.parse(data);
+}
+
+const getUsers = () => {
+    const data = fs.readFileSync('./data/users.json', 'utf-8')
     return JSON.parse(data);
 }
 
@@ -55,6 +45,7 @@ const updateTasks = () => {
 app.post('/signup', (request, response) => {
     const username = request.body.username;
     const password = request.body.password;
+    const users = getUsers();
     const user = users.find(user => user.username === username);
     if(user) {
         response.status(403).send(new Conflict());
@@ -65,7 +56,7 @@ app.post('/signup', (request, response) => {
         password,
         token: Date.now().toString(16),
     }
-    users.push(newUser);
+    writeToFile('./data/users.json', [...users, newUser]);
     response.send(JSON.stringify(newUser))
 })
 
@@ -75,7 +66,7 @@ app.post('/addTask', (req, res) => {
     const nextId = tasks.length;
     const newTask = {...task, id: nextId};
     res.send(JSON.stringify(newTask));
-    writeToFile('./data.json', [...tasks, newTask]);
+    writeToFile('./data/data.json', [...tasks, newTask]);
 })
 
 app.delete('/deleteTask/:id', (req, res) => {
@@ -83,7 +74,20 @@ app.delete('/deleteTask/:id', (req, res) => {
     const idTask = +req.params.id;
     const newTasks = tasks.filter(task => task.id !== idTask);
     res.send('Успешно удалено');
-    writeToFile('./data.json', newTasks);
+    writeToFile('./data/data.json', newTasks);
+})
+
+app.put('/compliteTask', (req, res) => {
+    const { id, exp, level } = req.body;
+    const tasks = getTasks();
+    const task = tasks.find(item => item.id === id)
+    task.status = 'complited';
+    try {
+        res.send('Успешно изменено')
+    } catch(e) {
+        res.send('Не удалось перезаписать')
+    }
+    writeToFile('./data/data.json', tasks);
 })
 
 app.put('/changeTask', (req, res) => {
@@ -96,11 +100,12 @@ app.put('/changeTask', (req, res) => {
     } catch(e) {
         res.send('Не удалось перезаписать')
     }
-    writeToFile('./data.json', tasks);
+    writeToFile('./data/data.json', tasks);
 })
 
 app.post('/login', (request, response) => {
     const { username, password } = request.body;
+    const users = getUsers();
     const user = users.find(user => user.username === username && user.password === password);
     if(!user) {
         response.status(401).send(new Unauthorized());
@@ -117,6 +122,7 @@ app.post('/login', (request, response) => {
 
 app.get('/data', (request, response) => {
     const token = request.headers.authorization;
+    const users = getUsers();
     const user = users.find(user => user.token === token);
     if(!user) {
         response.status(401).send(new Unauthorized());
