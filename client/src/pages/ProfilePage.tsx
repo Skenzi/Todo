@@ -51,6 +51,7 @@ function ProfilePageInfo(info: ProfileBaseInfo | ProfileStatsInfo) {
 function ProfilePage() {
   const { user } = useSelector(userSelector);
   const [currentTab, setCurrentTab] = useState('info');
+  console.log(user, 1)
   return (
     <div className="profile bg-main">
       <div className="profile__img" />

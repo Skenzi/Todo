@@ -52,7 +52,7 @@ function TaskBody({ task, setStateTaskForm, compliteTask }: TaskBodyProps) {
 }
 
 function TaskNote({ task }: { task: Task }) {
-  const user = useSelector(userSelector);
+  const {user} = useSelector(userSelector);
   const [stateTaskForm, setStateTaskForm] = useState(false);
   const dispatch = useDispatch();
 
@@ -69,13 +69,15 @@ function TaskNote({ task }: { task: Task }) {
         level += 1;
       }
       dispatch(setLevel({ expNextLvl, level }));
-      dispatch(setExp(newExpUser));
-    } else {
-      dispatch(setExp(newExpUser));
     }
-    
+    dispatch(setExp(newExpUser));
+
     dispatch(setContentTask({ id: task.id, property: 'status', value: 'complited' }));
-    axios.put('http://localhost:5000/changeTask', { id: task.id, property: 'status', value: 'complited' })
+    const dataRequest = { id: task.id, exp: newExpUser, level, userId: user.username };
+    axios.put('http://localhost:5000/compliteTask', dataRequest)
+      .then(({data}) => {
+        console.log(data)
+      })
   };
 
 

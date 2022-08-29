@@ -18,7 +18,7 @@ const tasksSlice = createSlice({
   reducers: {
     addTask: (state, { payload }) => {
       const newTask = {
-        ...payload, reward: +payload.reward, status: 'active', id: Date.now(), dateStart: Date.now(),
+        ...payload, reward: +payload.reward,
       };
       state.tasks.push(newTask);
     },

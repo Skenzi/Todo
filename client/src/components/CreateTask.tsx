@@ -13,7 +13,7 @@ const CreateTask = ({ closeModal }: { closeModal: () => void}) => {
     });
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const res = axios.post('http://localhost:5000/addTask', {task: taskData});
+        const res = axios.post('http://localhost:5000/addTask', {task: {...taskData, dateStart: Date.now()}});
         res.then(({ data }) => {
           dispatch(addTask(data))
         }).catch((err) => {

@@ -56,10 +56,9 @@ function App() {
   }
 
   const getAutorizedHeader = () => {
-    const user = sessionStorage.getItem('user');
+    const user = getUser();
     if(user) {
-      const {token} = JSON.parse(user);
-      return { Authorization: `${token}` };
+      return { Authorization: `${user.token}` };
     }
     return {};
   }
@@ -67,7 +66,6 @@ function App() {
   const elements = {
     body: document.querySelector('body'),
   };
-
   return (
     <apiContext.Provider value={{ getUser, logOut, getAutorizedHeader, elements }}>
       <BrowserRouter>

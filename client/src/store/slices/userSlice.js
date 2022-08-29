@@ -13,14 +13,14 @@ const userSlice = createSlice({
       state.user = payload;
     },
     setLevel: (state, { payload }) => {
-      state.level = payload.level;
-      state.expNextLvl = payload.expNextLvl;
+      state.user.level = payload.level;
+      state.user.expNextLvl = payload.expNextLvl;
     },
     setExp: (state, { payload }) => {
-      state.exp = payload;
+      state.user.exp = payload;
     },
     setStat: (state, { payload }) => {
-      state.stats[payload] += 1;
+      state.user.stats[payload] += 1;
     },
   },
 });

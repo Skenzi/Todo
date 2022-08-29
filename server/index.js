@@ -78,9 +78,14 @@ app.delete('/deleteTask/:id', (req, res) => {
 })
 
 app.put('/compliteTask', (req, res) => {
-    const { id, exp, level } = req.body;
+    const { id, exp, level, userId } = req.body;
     const tasks = getTasks();
-    const task = tasks.find(item => item.id === id)
+    const task = tasks.find(item => item.id === id);
+    const users = getUsers();
+    const user = users.find(user => user.username === userId);
+    user.exp = exp;
+    user.level = level;
+    writeToFile('./data/users.json', users)
     task.status = 'complited';
     try {
         res.send('Успешно изменено')
