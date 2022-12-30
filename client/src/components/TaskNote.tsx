@@ -61,7 +61,7 @@ function TaskNote({ task }: { task: Task }) {
     let newExpUser = task.reward + user.exp;
     let expNextLvl = user.expNextLvl;
     let level = user.level;
-  
+    console.log(expNextLvl, level)
     if (newExpUser >= user.expNextLvl) {
       while (expNextLvl <= newExpUser) {
         newExpUser -= expNextLvl;
@@ -73,7 +73,7 @@ function TaskNote({ task }: { task: Task }) {
     dispatch(setExp(newExpUser));
 
     dispatch(setContentTask({ id: task.id, property: 'status', value: 'complited' }));
-    const dataRequest = { id: task.id, exp: newExpUser, level, userId: user.username };
+    const dataRequest = { id: task.id, exp: newExpUser, level, userId: user.username, expNextLvl };
     axios.put('http://localhost:5000/compliteTask', dataRequest)
       .then(({data}) => {
         console.log(data)

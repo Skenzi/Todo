@@ -10,6 +10,7 @@ const userSlice = createSlice({
   },
   reducers: {
     setUser: (state, { payload }) => {
+      console.log(payload);
       state.user = payload;
     },
     setLevel: (state, { payload }) => {

@@ -20,11 +20,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js?x$/,
+        test: /\.jsx?$/,
         use: 'babel-loader',
       },
       {
-        test: /\.ts?x$/,
+        test: /\.tsx?$/,
         use: 'ts-loader',
       },
       {
